@@ -1,0 +1,86 @@
+<ion-fab class="admin-btn" vertical="top" horizontal="right">
+	<ion-fab-button>
+		<ion-icon name="apps-outline"></ion-icon>
+	</ion-fab-button>
+
+	<ion-fab-list *ngIf="debugMode" side="start">
+		<ion-fab-button (click)="test()">
+			<ion-icon name="qr-code-outline"></ion-icon>
+		</ion-fab-button>
+		<ion-fab-button (click)="test2()">
+			<ion-icon name="bug-outline"></ion-icon>
+		</ion-fab-button>
+	</ion-fab-list>
+
+	<ion-fab-list side="bottom">
+		<ion-fab-button style="--background-color: #0b8ff1" (click)="admin()">
+			<ion-icon name="log-in-outline"></ion-icon>
+		</ion-fab-button>
+		<ion-fab-button style="--background-color: #0b8ff1" (click)="login()">
+			<ion-icon name="log-in-outline"></ion-icon>
+		</ion-fab-button>
+		<ion-fab-button style="--color: #0b8ff1" (click)="register()">
+			<ion-icon src="./assets/img/svg/edit.svg"></ion-icon>
+		</ion-fab-button>
+	</ion-fab-list>
+</ion-fab>
+
+<ion-content class="main-content" [fullscreen]="true">
+
+	<ion-card class="logo">
+		<div class="wrapper-img">
+			<ion-img src="./assets/img/logo/foodzap-logo-compact-green.png"></ion-img>
+			<!--
+			<ion-img class="mascot" src="./assets/img/logo/start-logo-alt.png"></ion-img>
+			-->
+		</div>
+	</ion-card>
+
+	<ion-card class="info">
+		<div class="inner">
+			<h4 class="nf2">Matmeny i mobilen</h4>
+			Skanna QR-koden och läs menyn i mobilen, inte bara smidigt för dig, det
+			är miljövänligt och klimatsmart också.
+		</div>
+	</ion-card>
+
+	<ion-card>
+		<button (click)="scan()" class="sp-btn blue">
+			<span class="inner">
+				<ion-icon src="./assets/img/svg/qr-code.svg"></ion-icon>
+				<label>
+					Skanna QR-kod
+				</label>
+			</span>
+		</button>
+	</ion-card>
+
+	<!--
+	<ion-card>
+		<ion-grid>
+			<ion-row>
+				<ion-col size="6">
+					First
+				</ion-col>
+				<ion-col size="6">
+					Second
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+	-->
+
+	<ion-card class="content-footer">
+		<label>
+			DC Digital AB &copy; 2020, alla rättigheter reserverade.
+		</label>
+	</ion-card>
+
+	<!--
+	<svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677"><path _ngcontent-pqk-c18="" id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"></path></svg>
+	-->
+
+</ion-content>
+
+<ion-footer>
+</ion-footer>

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "wizum-259119",
+  "private_key_id": "0174efac62e50a0efb2216304507c12d54caa8aa",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCTpDm0yONnKJJj\nslyGy7c5+3QTpYw3PzOGg3tmY10CbSOD8mu9DzS+5NGpMJwrxwSOo+l9Um1UIYhQ\naTnxccNHSFW1pGdZFfkkuLmFuYUKo9R7vOU36zU4Hfufayv/gMUNuhrGlnpqbSsn\nyXG2XL5dsyUTlw1lJmR87Uhl/EWposU6ujpzCLuS87blW5D5nu+wN97LvKg2Pakv\nOOPRVQraKwNltVNYU2pdmHXG6qDR9aOwzJDEpmKvxzGPpXtTdkH3n0ynjujjAETj\nv71LDGfLrOS56F1BzrVWNT2kFJGU2j4NzsSduSWeHFpnMoFq3HarNDs1kbZP64GZ\nAmzHwAIXAgMBAAECggEAAbQwfPdLNeKQUJmQsHbjZhuSdbOVuwF+DRGxYozHra0o\nGXAPxukeWQxM+yCLfNnZd0f0UYpE/BE9qyfmZPSaJgAeCnBGR7nq29NMmNAmSpQk\nx0ohHxRrfc/4Gm6N3cSqVtk3UTllWkW+Qhb0uqphVrV9j7dQ4+zzK0SVxE+KrPAm\nd8Mu6/6E4PbsjCtwCy4Q7hcMOcARfsjxFIkQK5kLAXRLEsoqUuzwNA7xNSRy+qDu\nT9GxdGLJ/AAuLK0p5PD5re6d5sVTcE/MpWpqLpHtVW4h5mgAUKcsNUkV6dufBiXT\nfuyGeTHFlj2D3+08tuK7com3Ynj0IHaCpZHQM9aCqQKBgQDD3n5nwokiUSe9Zfe/\n3o7kT2v9KH+wLTDj64DS86j85ZXoPspL3XORlboekN63iyGLYZkSva1Fy628HTRN\nE7tSq9+HNSHnPitPgrQOO02qBEsfDbDSrwt5RMGduc5HGOpdVefsJtnzlULuiHN1\nVvVmHITGC9bF0l1CAMYQCA/5swKBgQDA93x3PbgN3gNsjCTmrAFz6f/Jctl8p4iy\ntmnda2vD/+BoS9gJQSHOSgTzG09zzKtiogNWD3cgO+8z8bUFXun/kvRKj+i0Xlk0\nJlsi0zvlmRQmS1Vr45sdrQz/1eXdksdExBRnu/NaMji4N0ar6MPdBIg4gxYDFBMB\noG3bV/xcDQKBgQCvJ5JGW3Kim4w8FKlejTme9V8Ofl7hPyhPSVRkULy3mt9ZVn01\nJo2ojQppNwfTfrm6mMZ4OeJvXdq5NCyHGLQVE9nKYTs2PSQh8DHv4Bxtg3ViCa4s\nWZibE19JGtVaQu+iE6ZYSc3xw3KdOKx3LBI7BBm/uOqQ8LOwyFxWDb+rfQKBgFin\n2/l008EbRXtzj+ijEi/NTIWjTKTm2/kvscfW+LYeM133qpPl5sA+ZbPD0mcjm4I/\naUT66gJXRvkYjdCf4OZY///ZylJEHrvE+44uepBsGkPVzLM66SNjRFuuTGPWcdL4\nO1/FjHLeLA0G6GNHF+XNlUBRiaV0bZ8LtC1YaUtpAoGBAIKGIfaLEdp3iYhEYdR1\nY0et9BxO+lR4JIb8g6QDjjvwW7LEehPAx5YZuvLqFIsWsh2JyvM/AFVpQVz+9Knd\nNfjB60rCse1NrDc6WOqqSMB0tuw2DeMT2Yn0xph9xc15o2Enf/JDjBgIFXB4yHdG\nzMgv+pt2V52EH8kVbBYaO//r\n-----END PRIVATE KEY-----\n",
+  "client_email": "starting-account-ujnd8dlr0j5a@wizum-259119.iam.gserviceaccount.com",
+  "client_id": "106606560225433524376",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/starting-account-ujnd8dlr0j5a%40wizum-259119.iam.gserviceaccount.com"
+}

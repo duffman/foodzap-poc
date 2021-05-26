@@ -1,0 +1,30 @@
+/**
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * @author: Patrik Forsberg <patrik.forsberg@coldmind.com>
+ * @date: February 2020
+ */
+
+import { IRestApiController } from "@api/api-controller";
+import { ControllerHelper }   from "@api/controller.helper";
+import { Router }             from "express";
+import { inject, injectable } from 'inversify';
+import { RestaurantService }  from '../restaurant/services/restaurant.service';
+
+@injectable()
+export class ReviewControllerTs implements IRestApiController {
+	debugMode: boolean;
+
+	constructor(
+		@inject("IRestaurantService") private restaurantService: RestaurantService) {
+		ControllerHelper.logAttach(this);
+	}
+
+	public initRoutes(routes: Router): void {
+		routes.all("/reviews", this.getReviews.bind(this));
+	}
+
+	private getReviews(req: Request, resp: Response): void {
+		//resp.end("Kalle Kula");
+	}
+}

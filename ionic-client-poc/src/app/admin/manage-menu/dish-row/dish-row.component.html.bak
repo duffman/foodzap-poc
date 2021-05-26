@@ -1,0 +1,17 @@
+<ion-item class="dish-item" [className]="getClassName(item)">
+
+	<ion-reorder *ngIf="showReorderSlot" slot="start"></ion-reorder>
+
+	<ion-thumbnail slot="start">
+		<img [src]="getThumbnail(item)" [style]="getThumbStyle(item)" alt="">
+	</ion-thumbnail>
+
+	<ion-label class="ion-text-wrap">
+		<span>{{ item.name }}</span>
+
+		<p>{{ item.description }}</p>
+		<p class="price"><b>
+			{{ item.price }} {{ item.symbol }}</b>
+		</p>
+	</ion-label>
+</ion-item>

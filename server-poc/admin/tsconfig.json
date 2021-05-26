@@ -1,0 +1,34 @@
+{
+	"compilerOptions": {
+		"lib":                    [
+			"es6",
+			"dom"
+		],
+		"types":                  [
+			"node",
+			"reflect-metadata",
+			"inversify"
+		],
+		"module":                 "commonjs",
+		"target":                 "ESNEXT",
+		"noImplicitAny":          false,
+		"sourceMap":              false,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata":  true,
+		"outDir":                 "./dist",
+		"baseUrl":                "./",
+		"paths":                  {
+			"@app/*":          [
+				"./app/*"
+			],
+			"@api/*":          [
+				"./app/controllers/*"
+			],
+			"@cli/*":        [
+				"./cli/*"
+			]
+		}
+	},
+	"exclude":         [
+	]
+}

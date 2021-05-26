@@ -1,0 +1,51 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>confirm-mobile</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<form [formGroup]="dishForm" (ngSubmit)="submit()">
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					Ange koden som skickats till nummer <b>{{ mobileNumber }}</b>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<input type="text" maxlength="1" name="digit1" />
+				</ion-col>
+				<ion-col>
+					<input type="text" maxlength="1" name="digit2" />
+				</ion-col>
+				<ion-col>
+					<input type="text" maxlength="1" name="digit3" />
+				</ion-col>
+				<ion-col>
+					<input type="text" maxlength="1" name="digit4" />
+				</ion-col>
+				<ion-col>
+					<input type="text" maxlength="1" name="digit5" />
+				</ion-col>
+				<ion-col>
+					<input type="text" maxlength="1" name="digit6 "/>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+
+</ion-content>
+
+<ion-footer slot="end">
+	<ion-toolbar>
+		<ion-buttons slot="end">
+			<ion-button (click)="submit()">
+				<ion-icon name="checkmark"></ion-icon>
+				OK
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-footer>
+

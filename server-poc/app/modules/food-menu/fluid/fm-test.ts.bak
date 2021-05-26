@@ -1,0 +1,112 @@
+/**
+ * Copyright (c) 2020 Patrik Forsberg <patrik.forsberg@coldmind.com> - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential.
+ * 2020-06-14
+ */
+
+import { IDbClient }       from "../../../../core/zyn-db/db-client";
+import { DbClient }        from "../../../../core/zyn-db/db-client";
+import { IDbSettings }     from "../../../../core/zyn-db/db-settings";
+import { FoodMenuAdminDb } from "../fm-admin-db";
+import { FoodMenu }        from "../models/food-menu.model";
+import { IFoodMenuItem }   from "../models/food-menu-item.fieldType";
+import { IFoodMenu }       from "../models/food-menu.fieldType";
+
+const menusData = {
+	id:          2,
+	field:        'Förrätter',
+	description: 'WOW Njut av våra härliga aptitretareees',
+	footer:      'footer is here',
+	items:       []
+}
+
+let dataDump = {
+	restaurantId:   -1,
+	foodMenuId:     1,
+	categoryId:     2,
+	languageId:     1,
+	foodMenus:      [],
+	postIdent:      'fm-pd',
+	deletedItemIds: []
+}
+
+const dbConfig: IDbSettings = {
+	dbType: "mysql",
+	dbName: "appetizer_new",
+	dbHost: "coldmind.com",
+	dbUser: "duffy",
+	dbPass: "bjoe7151212"
+};
+
+export class FmTest {
+	dbClient: IDbClient;
+
+	constructor(
+//		@inject(Inf.IFoodMenuAdminDbBeta) private adminDb: FoodMenuAdminDbBeta,
+	) {
+		let client = new DbClient();
+		client.configure(dbConfig);
+
+		/*
+		 public description: string;
+		 public footer: string;
+		 public id: number;
+		 public isDirty: boolean;
+		 public items: IFoodMenuItem[];
+		 public field: string;
+		 */
+
+		let a_foodMenus = new Array<IFoodMenu>();
+
+		let a_menu         = new FoodMenu();
+		a_menu.id          = 2;
+		a_menu.field        = 'Förrätter';
+		a_menu.description = 'WOW Njut av våra härliga aptitretareees';
+		a_menu.footer      = 'footer is here';
+		a_menu.items       = new Array<IFoodMenuItem>();
+
+		let item1: IFoodMenuItem = {
+			id:          25,
+			menuId:      -1,
+			catId:       2,
+			field:        'Rullar med bullar',
+			description: 'Smarrig rätt från polen',
+			price:       120,
+			code:        'SEK',
+			categories:  [],
+			photo:       null,
+			ref:         null,
+			weight:      5,
+			symbol:      'kr'
+		};
+
+		a_menu.items.push(item1);
+
+		let item2: IFoodMenuItem = {
+			id:          26,
+			menuId:      -1,
+			catId:       1,
+			field:        'Glass med Chockladsås',
+			description: '',
+			price:       19,
+			code:        'SEK',
+			categories:  [],
+			photo:       null,
+			ref:         null,
+			weight:      1,
+			symbol:      'kr'
+		};
+
+		a_menu.items.push(item2);
+
+		a_foodMenus.push(a_menu);
+
+		let adminDb = new FoodMenuAdminDb(client, new LogService())
+
+		//adminDb.assignData(a_foodMenus);
+		console.log('a_foodMenus ::', a_foodMenus);
+	}
+}
+
+new FmTest();

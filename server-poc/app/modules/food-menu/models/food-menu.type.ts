@@ -1,0 +1,18 @@
+/**
+ * Copyright (c) 2020 Patrik Forsberg <patrik.forsberg@coldmind.com> - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * 2020-05-22
+ */
+
+import { IFoodMenuItem } from "./food-menu-item.type";
+
+export interface IFoodMenu {
+	id:           number;
+	name:         string;
+	description?: string;
+	footer?:      string;
+	items?:       IFoodMenuItem[];
+	weight?:      number;
+	isDirty?:     boolean;
+}

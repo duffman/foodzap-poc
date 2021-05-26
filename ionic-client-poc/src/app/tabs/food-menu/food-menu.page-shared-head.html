@@ -1,0 +1,168 @@
+<app-cart-header>
+	{{ restaurantName }}
+</app-cart-header>
+
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-title>
+			{{ restaurantName }}
+		</ion-title>
+		<ion-buttons slot="end">
+			<ion-button (click)="debugData()">
+				<ion-icon name="bug-outline"></ion-icon>
+			</ion-button>
+			<ion-button (click)="goToCart()">
+				<ion-icon name="cart"></ion-icon>
+				<ion-badge color="primary">{{ getBasketCount() }}</ion-badge>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+	<ion-toolbar>
+		<ion-card class="category-bar-wrapper">
+
+			<div class="category-bar" color="primary" class="">
+				<ion-segment
+						value="all"
+						color="tertiary"
+						scrollable="true"
+						mode="ios"
+						[(ngModel)]="segmentModel"
+						(ionChange)="segmentChanged($event)">
+
+					<ion-segment-button (click)="selectMenu(null)" value="all">
+						<ion-label>All</ion-label>
+					</ion-segment-button>
+
+					<ion-segment-button *ngFor="let menu of foodMenusSource" [value]="i" (click)="selectMenu(menu)">
+						<ion-label>{{ menu.name }}</ion-label>
+					</ion-segment-button>
+
+				</ion-segment>
+			</div>
+		</ion-card>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content  class="ion-no-margin ion-no-padding" style="background: navy">
+	<ion-button (click)="testa()">RAFFE</ion-button>
+
+	<div style="display: none" class="restaurant-header">
+		<ion-img [src]="restaurantCover"></ion-img>
+	</div>
+
+<style>
+	ion-item {
+		background-color: black !important;
+	}
+
+	ion-item:nth-child(odd) {
+		background-color: #777 !important;
+	}
+
+	ion-item:nth-child(even) {
+		background-color: blue !important;
+	}
+</style>
+
+
+	<div style="background: navy; margin-right: 20px; position: relative">
+		<ion-card style="
+					background: #ffffff;
+					border-top-left-radius: 10px;
+					border-top-right-radius: 10px;
+					width: 100%;
+					position: absolute;
+					">
+			<ion-card *ngIf="loading">
+				<ion-grid>
+					<ion-row>
+						<ion-col>
+							<ion-spinner name="lines"></ion-spinner>
+						</ion-col>
+						<ion-col>
+							Hämtar meny...
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+
+			<ion-list *ngIf="!loading" class="food-menu" lines="">
+				<ion-item-group *ngFor="let menu of foodMenus; let i index">
+
+					<ion-item-divider class="dish-cat">
+						<ion-grid>
+							<ion-row>
+								<h3>
+									<span *ngIf="inDebugMode()">
+										{{ menu.id }}
+									</span>
+									{{ menu.name }}
+								</h3>
+							</ion-row>
+							<ion-row *ngIf="menu.description" style="padding-bottom: 10px">
+								{{ menu.description }}
+							</ion-row>
+						</ion-grid>
+					</ion-item-divider>
+
+					<ion-item-sliding>
+						<ion-item class="dish"
+							detail
+							lines="none"
+							detailIcon="none"
+							*ngFor="let item of menu.items; let i index"
+							(click)="addToCart(item)"
+							 >
+
+							<ion-icon
+									(click)="toggleFavorite(item)"
+									slot="start"
+									name="heart">
+							</ion-icon>
+
+
+							<ion-checkbox slot="start" (click)="toggleFavorite(item)"
+										  (ionChange)="getIsFave(item)" value="true" [(ngModel)]="item.faveIconClass"></ion-checkbox>
+
+							<ion-label class="ion-text-wrap">
+								<span>{{ getItemName(item) }}
+								{{ item.faveIconClass }}
+								</span>
+								<p>{{ item.description }}</p>
+								<p class="price"><b>
+									{{ item.price }} {{ item.symbol }}</b>
+								</p>
+							</ion-label>
+
+							<ion-thumbnail *ngIf="haveDishPhoto(item)" slot="end">
+								<img [src]="getDishPic(item)">
+							</ion-thumbnail>
+
+							<ion-icon (click)="addToBasket(item)" name="cart" slot="end"></ion-icon>
+
+							<ion-label *ngIf="getCountInBasket(item) > 0">
+								<div>
+									<div style="border-radius: 5px; background: #00aced; width: 30px;">
+										{{ getItemQty(item) }}
+									</div>
+								</div>
+							</ion-label>
+
+						</ion-item>
+						<ion-item-options side="end">
+							<ion-item-option>Unread</ion-item-option>
+						</ion-item-options>
+					</ion-item-sliding>
+
+				</ion-item-group>
+			</ion-list>
+		</ion-card>
+	</div>
+
+	<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+		<ion-fab-button style="margin-bottom: -5px;" color="primary" (click)="presentSettingsModal()">
+			<ion-icon name="md-globe"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+
+</ion-content>

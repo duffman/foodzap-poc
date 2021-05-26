@@ -1,0 +1,70 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>
+			{{ restaurantName || 'Min restaurang' }}
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="gradient ion-padding">
+
+	<ion-card class="ion-no-padding ion-no-margin">
+		<ion-list lines="none">
+			<ion-item>
+				<div class="image-slot" slot="start">
+					<img src="/assets/icon/email-64.png" alt="">
+					<img src="/assets/icon/yes.svg" width="32" class="status-icon"  alt="">
+				</div>
+				<ion-label>
+					Epost-verifiering
+				</ion-label>
+			</ion-item>
+			<ion-item>
+				<div class="image-slot" slot="start">
+					<img src="/assets/icon/phone-64.png" alt="">
+					<img src="/assets/icon/yes.svg" width="32" class="status-icon"  alt="">
+				</div>
+				<ion-label>
+					Telefonnummer-verifiering
+				</ion-label>
+			</ion-item>
+			<ion-item>
+				<div class="image-slot" slot="start">
+					<img src="/assets/icon/address.svg" width="50" height="50 " alt="">
+					<img src="/assets/icon/yes.svg" width="32" class="status-icon"  alt="">
+				</div>
+				<ion-label>
+					Adress-verifiering
+				</ion-label>
+			</ion-item>
+		</ion-list>
+	</ion-card>
+
+
+	<ion-card>
+		<ion-card-content>
+			<ion-list lines="none">
+				<ion-item class="ion-no-padding">
+
+					<ion-grid>
+						<ion-row>
+							<ion-col>
+								<ion-img src="./assets/qr-codes/code1.png" style="width: 64px"></ion-img>
+							</ion-col>
+							<ion-col>
+								<h2>QR-kod: 34598</h2>
+								<ion-button>Ladda ner</ion-button>
+								<ion-button (click)="orderStickersPage()">Beställ trycksaker</ion-button>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+
+				</ion-item>
+			</ion-list>
+		</ion-card-content>
+	</ion-card>
+
+</ion-content>

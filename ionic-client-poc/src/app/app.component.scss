@@ -1,0 +1,28 @@
+#app-side-menu {
+	ion-item {
+		--color: #000000;
+	}
+
+	ion-label {
+		--color: #000000;
+		font-weight: bold;
+	}
+
+	ion-header {
+		border: none;
+
+		.ion-list-header {
+			ion-label {
+				--color: #000000;
+			}
+		}
+
+		.logo {
+			padding: 10px;
+		}
+	}
+}
+
+.header-md::after {
+	--background: none !important;
+}

@@ -1,0 +1,7 @@
+{
+	"langRepo": [
+		{ "code": "se", "name": "Swedish", "nativeName": "Svenska", "fileName": "se.json" },
+		{ "code": "ru", "name": "Russian", "nativeName": "русский", "fileName": "ru.json" },
+		{ "code": "en", "name": "English", "nativeName": "English", "fileName": "en.json" }
+	]
+}

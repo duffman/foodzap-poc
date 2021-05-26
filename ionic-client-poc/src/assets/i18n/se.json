@@ -1,0 +1,21 @@
+{
+	"disqualifier": "ILA7191A12",
+	"langName": {
+		"id": 340,
+		"native": "Svenska",
+		"int": "Swedish"
+	},
+	"app": {
+		"balle": {
+			"b64Enc": true,
+			"data": "U3Rq5HJ0c25vcnJlIQ=="
+		},
+		"name": "Stjärt-startaren",
+		"desc": "Detta är en hemsk liten kuk-fabrik",
+		"tabs": [
+			{
+				"name": "Bullrunka"
+			}
+		]
+	}
+}

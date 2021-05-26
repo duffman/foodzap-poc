@@ -1,0 +1,1 @@
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});class NexTableCell{constructor(){}}exports.NexTableCell=NexTableCell;class NexTableRow{constructor(){}}exports.NexTableRow=NexTableRow;class NexTable{constructor(){this.rows=[];}}exports.NexTable=NexTable;

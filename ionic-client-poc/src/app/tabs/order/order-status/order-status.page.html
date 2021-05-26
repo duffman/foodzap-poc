@@ -1,0 +1,29 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>Orderstatus</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+
+</ion-content>
+
+<ion-footer slot="end">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-button *ngIf="canCancel()" (click)="cancelOrder()">
+				<ion-icon name="close-outline"></ion-icon>
+				Avbryt
+			</ion-button>
+		</ion-buttons>
+
+		<ion-buttons slot="end">
+			<ion-button (click)="submit()">
+				<ion-icon name="checkmark"></ion-icon>
+				OK
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-footer>

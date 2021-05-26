@@ -1,0 +1,103 @@
+
+<ion-content class="login-content ion-no-margin ion-no-padding">
+
+	<ion-card class="logo">
+		<div class="wrapper-img">
+			<ion-img src="./assets/img/logo/foodzap-logo-compact-green.png"></ion-img>
+		</div>
+	</ion-card>
+
+	<ion-grid class="ion-no-padding">
+		<ion-row>
+			<ion-col>
+				<ion-card class="login-box ion-no-padding ion-no-margin">
+					<h3>Befintligt konto</h3>
+
+					<form [formGroup]="loginForm" (ngSubmit)="doLogin()">
+						<ion-list class="inputs-list" lines="full">
+							<ion-item class="input-item">
+								<ion-input type="email"
+										   placeholder="Email"
+										   formControlName="email"
+										   clearInput
+										   autocapitalize="off"
+										   inputmode="email">
+								</ion-input>
+							</ion-item>
+							<div class="error-container">
+								<ng-container *ngFor="let validation of validation_messages.email">
+									<div class="error-message"
+										 *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+										<ion-icon name="information-circle-outline"></ion-icon>
+										<span>{{ validation.message }}</span>
+									</div>
+								</ng-container>
+							</div>
+
+							<ion-item class="input-item">
+								<app-show-hide-password>
+									<ion-input type="password" placeholder="Password"
+											   formControlName="password"></ion-input>
+								</app-show-hide-password>
+							</ion-item>
+
+							<div class="error-container">
+								<ng-container *ngFor="let validation of validation_messages.password">
+									<div class="error-message" *ngIf="loginForm.get('password').hasError(validation.type)
+									&& (loginForm.get('password').dirty || loginForm.get('password').touched)">
+										<ion-icon name="information-circle-outline"></ion-icon>
+										<span>{{ validation.message }}</span>
+									</div>
+								</ng-container>
+							</div>
+						</ion-list>
+
+						<ion-button class="btn-blue" type="submit" expand="block">
+							<ion-icon name="key-outline"></ion-icon>
+							Log In
+						</ion-button>
+
+						<ion-button class="forgot-btn" fill="clear" expand="full" [routerLink]="['/admin/restore-pass']">
+							Forgot Password?
+						</ion-button>
+
+					</form>
+				</ion-card>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ion-card class="login-box ion-no-padding ion-no-margin" style="margin-top: 10px">
+					<h3>Registrera Abbonemang</h3>
+					<p>
+						Med ett FoodZap-abbonemang kan ni registrera ny restaurang, lägga upp menyer, bilder m.m.
+						För mer information, besök vår webbplats <a href="">foodzap.app</a>.
+					</p>
+
+					<ion-button class="btn-green" (click)="doRegister()" expand="block">
+						<ion-icon name="person-add"></ion-icon>
+						Registrera restaurang
+					</ion-button>
+
+					<p>
+						<a class="item" href="#"
+						   onclick="window.open('https://www.nraboy.com/contact', '_system', 'location=yes'); return false;">
+							Klicka här för att besöka FoodZap på webben.
+						</a>
+					</p>
+				</ion-card>
+
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<!--
+				<ion-button class="btn btn-blue" expand="full">
+					Sekretesspolicy
+				</ion-button>
+				-->
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+</ion-content>

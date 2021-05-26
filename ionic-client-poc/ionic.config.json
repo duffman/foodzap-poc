@@ -1,0 +1,8 @@
+{
+  "name": "appetizer.app",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

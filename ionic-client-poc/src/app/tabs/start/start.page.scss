@@ -1,0 +1,242 @@
+/*.dish-item {
+	.wrapper {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	price-chip {
+
+	}
+}
+*/
+
+
+.main-content {
+	background: #ffffff;
+}
+
+.info {
+	background: #ccf3e6;
+	padding: 1rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+
+	.inner {
+		padding: 1.5rem;
+
+		h4 {
+			margin: 0;
+			font-size: 18pt;
+			font-weight: 600;
+		}
+	}
+
+
+}
+
+
+/***********************************************************************************************************************
+***********************************************************************************************************************/
+
+.main-content {
+	--background: url('/assets/img/svg/clouds.svg') no-repeat -82px 386px;
+}
+
+ion-card {
+	background: transparent;
+
+}
+
+.info {
+	font-size: 15pt !important;
+	padding: 5px;
+}
+
+.cover {
+	--background: #0a890a !important;
+	--color: #ffffff;
+}
+
+.alert-btn-ok {
+	background: aqua !important;
+	margin-bottom: 10px !important;
+}
+
+.button-native {
+	border-radius: 5px !important;
+}
+
+.fat-button {
+	.button-native {
+		border-radius: 5px !important;
+	}
+
+	button {
+		border-radius: 5px !important;
+	}
+
+	border-radius: 5px !important;
+}
+
+.white {
+	--color: #606060;
+	border: solid 1px #b7b7b7;
+	background: #fff;
+	--background: #fff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+	background: -moz-linear-gradient(top, #fff, #ededed);
+}
+
+.scan-button {
+	display: inline-block;
+	zoom: 1;
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	outline: none;
+	text-decoration: none;
+	padding: .5em 2em .55em;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+	border-radius: .5em;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+}
+
+.start-anim {
+	position: relative;
+	width: 100%;
+	height: 200px;
+	display: flex;
+	justify-content: center;
+
+	.inner {
+		align-self: center;
+
+		.qr-anim {
+		}
+	}
+}
+
+.new-version-box {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-clip: border-box;
+	border: 1px solid #e3e6f0;
+	border-radius: .35rem;
+
+	box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .15) !important;
+	border-left: .25rem solid #4e73df !important;
+	padding-bottom: .5rem !important;
+	background: #7abcff;
+	background: -webkit-linear-gradient(top, #7abcff 0%, #60abf8 44%, #4096ee 100%);
+
+	.inner {
+		--color: #ffffff;
+		color: #ffffff;
+	}
+}
+
+.s-btn {
+	width: 100%;
+	background: lime;
+	border-radius: 5px;
+}
+
+/******************************************************************************
+
+ Start Page Button
+
+******************************************************************************/
+
+.sp-btn {
+	box-shadow: 1px 1px 4px 2px #bbbbbb;
+	border-radius: 7px;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-size: 17px;
+	font-weight: normal;
+	padding: 15px;
+	text-decoration: none;
+	text-transform: uppercase;
+	width: 100%;
+	margin-bottom: 4px;
+	margin-right: 4px;
+
+	.inner {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		label {
+			padding-left: 6px;
+		}
+	}
+}
+
+.sp-btn {
+	outline-width: 0 !important;
+}
+
+/* Green */
+.sp-btn.green {
+	border: 1px solid #18ab29;
+	background-color: #44c767;
+	background: linear-gradient(to bottom, #75b503 5%, #378b1b 100%);
+	text-shadow: 0 1px 1px #2f6627;
+}
+
+.sp-btn.green:active {
+	background: linear-gradient(to bottom, #378b1b 5%, #75b503 100%);
+}
+
+/* Blue */
+.sp-btn.blue {
+	border: 1px solid #0f8ce2;
+	background-color: #0b8ff1;
+	background: linear-gradient(to bottom, #0b8ff1 5%, #036eb5 100%);
+	text-shadow: 0 1px 1px #054b7d;
+}
+
+.sp-btn.blue:active {
+	background: linear-gradient(to bottom, #036eb5 5%, #0976c7 100%);
+}
+
+.debug-card {
+	border-radius: 10px;
+	padding: 10px;
+	background: #f0cbce;
+
+	.fat-button {
+		background: #e32a3c !important;
+		color: #ffffff;
+		width: 100%;
+		padding: 10px;
+		margin-bottom: 10px;
+	}
+
+	.fat-button:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.admin-btn {
+	position: absolute;
+	right: 10px !important;
+	top: 10px !important;
+}
+
+.content-footer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 20px;
+	background: transparent;
+	--background-color: transparent !important;
+}
+
+.content-footer * {
+	--background-color: transparent !important;
+}

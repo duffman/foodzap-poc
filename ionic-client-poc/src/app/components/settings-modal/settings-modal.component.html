@@ -1,0 +1,31 @@
+<ion-toolbar color="primary">
+	<ion-title>Language and Currency</ion-title>
+	<ion-button slot="primary" fill="clear">
+		<ion-text color="light">Cancel</ion-text>
+	</ion-button>
+</ion-toolbar>
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col size="12" class="ion-padding">
+				<form [formGroup]="settingsForm" (ngSubmit)="change()">
+					<mat-form-field style="width: 100%;" appearance="outline">
+						<mat-label>Choose Language:</mat-label>
+						<mat-select formControlName="selectedLang">
+							<mat-option *ngFor="let lang of languages" [value]="lang">{{lang.English}}</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<br>
+					<mat-form-field style="width: 100%;" appearance="outline">
+						<mat-label>Choose Currency:</mat-label>
+						<mat-select formControlName="selectedCur">
+							<mat-option *ngFor="let cur of currency" [value]="cur">{{cur.name}}</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<!-- <ion-img *ngIf="icon" [src]="icon"></ion-img> -->
+					<ion-button expand="block" type="submit">Submit</ion-button>
+				</form>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

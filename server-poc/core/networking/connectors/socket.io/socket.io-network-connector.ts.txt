@@ -1,0 +1,111 @@
+
+
+/**
+ * COLDMIND LTD ("COMPANY") CONFIDENTIAL
+ * Unpublished Copyright (c) 2015-2017 COLDMIND LTD, All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains the property of COMPANY. The intellectual and technical concepts contained
+ * herein are proprietary to COMPANY and may be covered by U.S. and Foreign Patents, patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained
+ * from COMPANY.  Access to the source id contained herein is hereby forbidden to anyone except current COMPANY employees, managers or contractors who have executed
+ * Confidentiality and Non-disclosure agreements explicitly covering such access.
+ *
+ * The copyright notice above does not evidence any actual or intended publication or disclosure  of  this source id, which includes
+ * information that is confidential and/or proprietary, and is a trade secret, of  COMPANY.   ANY REPRODUCTION, MODIFICATION, DISTRIBUTION, PUBLIC  PERFORMANCE,
+ * OR PUBLIC DISPLAY OF OR THROUGH USE  OF THIS  SOURCE CODE  WITHOUT  THE EXPRESS WRITTEN CONSENT OF COMPANY IS STRICTLY PROHIBITED, AND IN VIOLATION OF APPLICABLE
+ * LAWS AND INTERNATIONAL TREATIES.  THE RECEIPT OR POSSESSION OF  THIS SOURCE CODE AND/OR RELATED INFORMATION DOES NOT CONVEY OR IMPLY ANY RIGHTS
+ * TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING THAT IT  MAY DESCRIBE, IN WHOLE OR IN PART.
+ *
+ * Created by Patrik Forsberg on 2017
+ */
+
+let express	= require("express");
+let webApp     = express();
+let http    = require("http").Server(webApp);
+let io      = require("socket.io")(http);
+
+import { injectable }                      from "inversify";
+import { EventEmitter }	                   from 'events';
+import { IConnection }                     from '@core/networking/connection';
+import { INetworkConnector }               from '@core/networking/network-connector';
+import { SocketEvents }                    from '@core/networking/connectors/network-connector';
+import { SocketIoConnection }              from '@core/networking/connectors/socket.io/socket.io-connection';
+import { SocketIoSocket }                  from '@core/networking/connectors/socket.io/socket.io-socket';
+import { Logger } from "@cli/cli.logger";
+
+const SOCKET_IO_MESSAGE     = "msg";
+const SOCKET_IO_CONNECTION  = "connection";
+
+@injectable()
+export class SocketIONetworkConnector implements INetworkConnector {
+	public field: string = "SocketIO";
+	private eventEmitter: EventEmitter;
+	socketIoPort = 9090;
+
+	constructor() {
+		let scope = this;
+		this.eventEmitter = new EventEmitter();
+
+		Logger.logPurple("* SocketIOProtocolHandler Constructor");
+
+		http.listen(this.socketIoPort, function() {
+			Logger.logCoreInfo(this, `ColdmindServerCore is Listening on:  ${this.socketIOPort}`);
+		});
+
+		io.on(SOCKET_IO_CONNECTION, function(socket: any) {
+			scope.handleConnection(socket);
+		});
+	}
+
+	private handleConnection(socket: any) {
+		console.log('socket.io :: handleConnection');
+		let scope = this;
+
+		let ioSocket = new SocketIoSocket(socket);
+		let connection: IConnection = new SocketIoConnection(ioSocket);
+
+		socket.on(SOCKET_IO_MESSAGE, function(data) {
+			scope.handleMessage(connection, data);
+		});
+
+		this.eventEmitter.emit(SocketEvents.newConnection, connection);
+	}
+
+	private handleMessage(connection: IConnection, message: string, parseJson: boolean = true) {
+		try {
+			Logger.logCyan('******** RECEIVE ****');
+			Logger.logCyan('Data ::', message);
+			Logger.logCyan('*********************');
+
+			let dataObject: any;
+
+			if (parseJson) {
+				dataObject = JSON.parse(message);
+			}
+
+			if (dataObject.tag !== undefined && dataObject.tag !== undefined) {}
+
+			this.eventEmitter.emit(SocketEvents.dataAvailable, connection, dataObject);
+
+		} catch(exception) {
+			console.log("Exception data", message);
+			console.log("Post message failed:", exception);
+		}
+	}
+
+	public onNewConnection(listener: any) {
+		this.eventEmitter.addListener(SocketEvents.newConnection, listener);
+	}
+
+	public onConnectionClosed(listener: any) {
+		this.eventEmitter.addListener(SocketEvents.closed, listener);
+	}
+
+	public onData(listener: any) {
+		this.eventEmitter.addListener(SocketEvents.dataAvailable, listener);
+	}
+
+	public onError(listener: any) {
+		this.eventEmitter.addListener(SocketEvents.error, listener);
+	}
+}

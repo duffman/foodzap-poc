@@ -1,0 +1,46 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-button (click)="goBack()">
+				<ion-icon name="arrow-back-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+		<!--
+		<ion-title>Mer</ion-title>
+		-->
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+
+		<ion-list-header>
+			Inställningar
+		</ion-list-header>
+
+		<ion-item href="#">
+			<ion-label>Sekretess</ion-label>
+		</ion-item>
+		<ion-item (click)="goto('tabs/settings');">
+			<ion-label>Användarvillkor</ion-label>
+		</ion-item>
+
+
+
+		<ion-list-header>
+			Legal
+		</ion-list-header>
+
+		<ion-item (click)="goto('terms/privacy');">
+			<ion-label>Privacy</ion-label>
+		</ion-item>
+
+		<ion-item (click)="goto('terms/terms');">
+			<ion-label>Terms</ion-label>
+		</ion-item>
+
+
+	</ion-list>
+
+
+</ion-content>

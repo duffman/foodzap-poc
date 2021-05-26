@@ -1,0 +1,105 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-button (click)="goBack()">
+				<ion-icon name="arrow-back-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+
+		<ion-title>Beställning</ion-title>
+
+		<ion-buttons slot="end">
+			<ion-button disabled="true">
+				<ion-icon name="cart"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-segment color="primary" [(ngModel)]="selectedPage">
+		<ion-segment-button value="orders">
+			Beställning
+		</ion-segment-button>
+
+		<ion-segment-button value="order-history">
+			Historik
+		</ion-segment-button>
+	</ion-segment>
+
+	<div [ngSwitch]="selectedPage" class="ion-padding">
+
+		<!---------------------------------------------->
+		<!-- Info -->
+		<!---------------------------------------------->
+		<div *ngSwitchCase="'orders'">
+
+			<ion-card *ngIf="isEmpty() === true">
+				<ion-grid>
+					<ion-row>
+						<ion-col>
+							<div class="empty-cart">
+								<img src="./assets/img/shopping-cart.svg" style="width: 30%">
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col style="text-align: center">
+							<h4>Beställningen är tom</h4>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+
+			<form [formGroup]="orderForm">
+
+			<ion-card>
+
+				<ion-grid *ngIf="isEmpty() === false">
+
+					<ion-row *ngFor="let item of basket.items; let i index">
+						<ion-col>
+							<ion-list class="" lines="full">
+								<ion-item>
+									<ion-label>{{ item.name }}</ion-label>
+									<ion-icon name="trash" slot="end"></ion-icon>
+								</ion-item>
+							</ion-list>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+
+				<ion-grid *ngIf="isEmpty() === false">
+					<ion-row>
+						<ion-col>
+
+							<ion-grid>
+								<ion-row *ngFor="let item of basket.items; let i index">
+									<ion-col>
+										<ion-label>{{ item.name }}</ion-label>
+										<app-counter-input formControlName="counter2" basic></app-counter-input>
+									</ion-col>
+								</ion-row>
+							</ion-grid>
+
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<ion-button (click)="sendOrder()" expand="full">
+								<ion-icon name="checkmark"></ion-icon>
+								Skicka beställning
+							</ion-button>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+
+			</ion-card>
+
+			</form>
+
+		</div>
+
+	</div>
+</ion-content>

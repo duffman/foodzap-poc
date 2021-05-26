@@ -1,0 +1,35 @@
+<ion-tabs id="appTabs">
+
+	<ion-tab-bar id="tabBar" slot="bottom">
+		<ion-tab-button (click)="goHome()">
+			<ion-icon name="home-outline"></ion-icon>
+			<ion-label>Start</ion-label>
+		</ion-tab-button>
+
+		<ion-tab-button tab="menu">
+			<ion-icon name="restaurant"></ion-icon>
+			<ion-label>Meny</ion-label>
+		</ion-tab-button>
+
+		<ion-tab-button (click)="openMorePage()"><!-- tab="more"> -->
+			<ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+			<ion-label>Mer</ion-label>
+		</ion-tab-button>
+	</ion-tab-bar>
+
+	<!----------------------------------------------->
+	<!-- Admin Tabs                                -->
+	<!-----------------------------------------------
+	<ion-tab-bar id="adminTabBar" slot="bottom">
+		<ion-tab-button tab="tab1">
+			<ion-icon name="triangle"></ion-icon>
+			<ion-label>Tab 1</ion-label>
+		</ion-tab-button>
+
+		<ion-tab-button tab="tab3">
+			<ion-icon name="square"></ion-icon>
+			<ion-label>Tab 3</ion-label>
+		</ion-tab-button>
+	</ion-tab-bar>
+	-->
+</ion-tabs>

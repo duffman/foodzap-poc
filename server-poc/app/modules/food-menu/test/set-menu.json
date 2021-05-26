@@ -1,0 +1,69 @@
+{
+	"restaurantId": 1,
+	"menu":         {
+		"id":          2,
+		"name":        "Förrätter",
+		"description": "Njut av våra härliga aptitretare",
+		"footer":      null,
+		"items":       [
+			{
+				"id":          24,
+				"name":        "Hallonslungad krabba",
+				"description": "Gott från hav och skog",
+				"price":       100,
+				"code":        "SEK",
+				"symbol":      "kr",
+				"categories":  [
+					{
+						"type":  "vegetarian",
+						"value": true
+					}
+				],
+				"photo":       null,
+				"weight":      5
+			},
+			{
+				"id":          25,
+				"name":        "Rullar med bullar",
+				"description": "Smarrig rätt från polen",
+				"price":       120,
+				"code":        "SEK",
+				"symbol":      "kr",
+				"categories":  [
+					{
+						"type":  "lactose",
+						"value": true
+					},
+					{
+						"type":  "vegetarian",
+						"value": true
+					}
+				],
+				"photo":       null,
+				"weight":      4
+			},
+			{
+				"id":          3,
+				"name":        "Currykyckling med Ris",
+				"description": "Läckra strutsbröst med späckinlindad ankstjärt i hyvelspån slungad med sviskonpaj",
+				"price":       130,
+				"code":        "SEK",
+				"symbol":      "kr",
+				"categories":  [],
+				"photo":       null,
+				"weight":      3
+			},
+			{
+				"id":          26,
+				"name":        "Glass med Chockladsås",
+				"description": "",
+				"price":       19,
+				"code":        "SEK",
+				"symbol":      "kr",
+				"categories":  [],
+				"photo":       null,
+				"weight":      2
+			}
+		]
+	}
+}

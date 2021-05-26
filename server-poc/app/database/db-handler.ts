@@ -1,0 +1,17 @@
+/**
+ * Copyright (c) 2020 Patrik Forsberg <patrik.forsberg@coldmind.com> - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * 2020-05-17
+ */
+
+import { injectable } from "inversify";
+
+export interface IDbHandler {
+}
+
+@injectable()
+export class DbHandler implements IDbHandler {
+	constructor() {
+	}
+}

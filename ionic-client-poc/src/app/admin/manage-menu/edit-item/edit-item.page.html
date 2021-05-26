@@ -1,0 +1,125 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>{{ title }}</ion-title>
+		<ion-buttons slot="end">
+			<ion-button (click)="dismiss()">
+				<ion-icon name="close-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="forms-validations-content">
+	<form class="validations-form" [formGroup]="validationsForm" (ngSubmit)="onSubmit(validationsForm.value)">
+		<ion-list class="inputs-list" lines="full">
+			<ion-item>
+				<ion-grid>
+					<ion-row>
+						<ion-col style="max-width: 256px">
+							<ion-img *ngIf="!dish.photo" src="./assets/icon/picture.svg"></ion-img>
+
+							<ion-img *ngIf="dish.photo" [src]="dish.photo"></ion-img>
+						</ion-col>
+						<ion-col>
+							<ion-button class="submit-btn" (click)="takePhoto()" type="button" expand="full" fill="outline">
+								<ion-icon name="camera"></ion-icon>
+								{{ btnPhotoText }}
+							</ion-button>
+
+							<ion-button class="submit-btn" color="danger" type="button" expand="full" fill="solid" *ngIf="dish.photo">
+								<ion-icon name="trash-outline"></ion-icon>
+								Radera Foto
+							</ion-button>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-item>
+
+			<ion-item class="input-item">
+				<ion-label position="floating">Menu</ion-label>
+				<ion-select [value]="dish.id" formControlName='menuId' cancelText='Avbryt' okText='OK'>
+					<ion-select-option *ngFor="let menu of foodMenus" [value]="menu.id" >{{ menu.name }}</ion-select-option>
+				</ion-select>
+			</ion-item>
+
+			<ion-item class="input-item">
+				<ion-label position="floating">Name</ion-label>
+				<ion-input type="text" formControlName="name" clearInput></ion-input>
+			</ion-item>
+			<div class="error-container">
+				<ng-container *ngFor="let validation of validations.name">
+					<div class="error-message" *ngIf="validationsForm.get('name').hasError(validation.type) && (validationsForm.get('name').dirty || validationsForm.get('name').touched)">
+						<ion-icon name="information-circle-outline"></ion-icon>
+						<span>{{ validation.message }}</span>
+					</div>
+				</ng-container>
+			</div>
+
+			<ion-item class="input-item">
+				<ion-label position="floating">Beskrivning</ion-label>
+				<ion-textarea formControlName="description"></ion-textarea>
+			</ion-item>
+			<div class="error-container">
+				<ng-container *ngFor="let validation of validations.description">
+					<div class="error-message" *ngIf="validationsForm.get('description').hasError(validation.type) && (validationsForm.get('description').dirty || validationsForm.get('description').touched)">
+						<ion-icon name="information-circle-outline"></ion-icon>
+						<span>{{ validation.message }}</span>
+					</div>
+				</ng-container>
+			</div>
+
+			<ion-item class="input-item">
+				<ion-label position="floating">Pris (SEK)</ion-label>
+				<ion-input type="text" formControlName="price" clearInput inputmode="number"></ion-input>
+			</ion-item>
+			<div class="error-container">
+				<ng-container *ngFor="let validation of validations.price">
+					<div class="error-message" *ngIf="validationsForm.get('price').hasError(validation.type) && (validationsForm.get('price').dirty || validationsForm.get('price').touched)">
+						<ion-icon name="information-circle-outline"></ion-icon>
+						<span>{{ validation.message }}</span>
+					</div>
+				</ng-container>
+			</div>
+		</ion-list>
+
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<ion-button class="submit-btn" type="submit" expand="block" fill="solid" [disabled]="!validationsForm.valid">
+						{{ btnSubmitText }}
+					</ion-button>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<ion-button (click)="dismiss()" class="submit-btn" type="button" expand="block" fill="outline">
+						Avbryt
+					</ion-button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+
+	<!--
+	<ion-segment color="primary" [(ngModel)]="topTabs" class="ion-padding-horizontal">
+		<ion-segment-button value="info">
+			<ion-icon name="restaurant"></ion-icon>
+		</ion-segment-button>
+		<ion-segment-button value="hours">
+			<ion-icon name="time"></ion-icon>
+		</ion-segment-button>
+	</ion-segment>
+
+	<div [ngSwitch]="topTabs" class="">
+		<div *ngSwitchCase="'info'">
+			INFO
+		</div>
+		<div *ngSwitchCase="'hours'">
+			HOURS
+		</div>
+	</div>
+	-->
+
+
+
+</ion-content>

@@ -1,0 +1,176 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Amaranth:wght@400;700&family=Grandstander:wght@100;300;400&family=Lato&family=Merriweather&family=Open+Sans&family=Playfair+Display&family=Roboto&family=Yanone+Kaffeesatz:wght@300;400&display=swap');
+@import 'theme/theme';
+
+.nf1 {
+	--ion-font-family: 'Amaranth', sans-serif;
+	font-family: var(--ion-font-family) !important;
+}
+
+.nf2 {
+	--ion-font-family: 'Grandstander', cursive;
+	font-family: var(--ion-font-family) !important;
+}
+
+.nf3 {
+	--ion-font-family: 'Lato', sans-serif;
+	font-family: var(--ion-font-family) !important;
+}
+
+.nf4 {
+	--ion-font-family: 'Merriweather', serif;
+	font-family: var(--ion-font-family) !important;
+}
+
+.nf4 {
+	--ion-font-family: 'Merriweather', serif;
+	font-family: var(--ion-font-family) !important;
+}
+
+.nf4 {
+	--ion-font-family: 'Merriweather', serif;
+	font-family: var(--ion-font-family) !important;
+}
+
+.nf5 {
+	--ion-font-family: 'Open Sans', sans-serif;
+	font-family: var(--ion-font-family) !important;
+}
+
+.nf6 {
+	--ion-font-family: 'Playfair Display', serif;
+	font-family: var(--ion-font-family) !important;
+}
+
+.nf7 {
+	--ion-font-family: 'Roboto', sans-serif;
+	font-family: var(--ion-font-family) !important;
+}
+
+.nf8 {
+	--ion-font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-family: var(--ion-font-family) !important;
+}
+
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+@font-face {
+	font-family: 'San Fransico';
+	/* src: url('../fonts/Anton/Anton-Regular.ttf'); / mine */
+	src: url('assets/fonts/Anton/Anton-Regular.ttf');
+	/* src: url('path/to/your/font/file');//path to your font file */
+}
+
+* {
+}
+
+.c-font {
+	--ion-font-family: 'Anton', sans-serif;
+	font-family: var(--ion-font-family) !important;
+}
+
+/**********************************************************************************************************************/
+
+/* in-flight clone */
+.gu-mirror {
+	position: fixed !important;
+	margin: 0 !important;
+	z-index: 9999 !important;
+	opacity: 0.8;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	pointer-events: none;
+}
+
+/* high-performance display:none; helper */
+.gu-hide {
+	left: -9999px !important;
+}
+
+/* added to mirrorContainer (default = body) while dragging */
+.gu-unselectable {
+	-webkit-user-select: none !important;
+	-moz-user-select: none !important;
+	-ms-user-select: none !important;
+	user-select: none !important;
+}
+
+/* added to the source element while its mirror is dragged */
+.gu-transit {
+	opacity: 0.2;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+	filter: alpha(opacity=20);
+}
+
+
+
+/***********************************************************************************************************************
+
+	Alert Controller
+	alert-button ion-focusable ion-activatable alert-button-role-cancel alert-btn-ok sc-ion-alert
+
+***********************************************************************************************************************/
+
+.alert-button-group {
+	padding-bottom: 15px !important;
+}
+
+.alert-button {
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+	border-radius: 5px !important;
+}
+
+.alert-button-role-cancel {
+	background: #f4344f !important;
+	color: #ffffff !important;
+}
+
+/**********************************************************************************************************************/
+
+ion-card {
+	box-shadow: none;
+
+	h1 {
+		margin-top: 5px;
+	}
+}
+
+ion-button {
+	ion-icon {
+		padding-right: 10px;
+	}
+}
+
+/**********************************************************************************************************************/
+
+$catBtnAct:  lime;

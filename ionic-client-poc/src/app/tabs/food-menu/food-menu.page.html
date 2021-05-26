@@ -1,0 +1,114 @@
+<ion-header>
+
+	<ion-toolbar class="category-toolbar" style="min-height: 0">
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+
+		<div style="display: flex;
+				align-items: center;
+				padding: 1rem 0.5rem;
+				justify-content: space-between">
+			<div class="joy-header">
+				<div *ngIf="haveLogo()" style="width: 64px">
+					<div class="profile">
+						<img src="./assets/img/food-store.png" alt="">
+					</div>
+				</div>
+				<div class="name">
+					<div class="name-wrap" style="padding-bottom: 0.3rem">
+						{{ restaurantName }}
+					</div>
+
+					<style>
+						.address {
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							padding-right: 10px;
+						}
+					</style>
+
+					<div class="address">
+						<img src="./assets/icon/ico-location-16.png"/>
+						<div class="street">Stationsgatan 57, 972 45</div>
+					</div>
+
+				</div>
+			</div>
+			<div>
+				<div class="social-media">
+					<ion-img src="./assets/img/ico/social-media/skype.png"></ion-img>
+					<ion-img src="./assets/img/ico/social-media/facebook.png"></ion-img>
+				</div>
+			</div>
+		</div>
+	</ion-toolbar>
+
+	<ion-toolbar class="category-toolbar">
+		<ion-card class="cat-slect-wrap ion-no-padding">
+			<div class="cat-bar ion-no-padding">
+				<ion-segment
+					value="all"
+					color="primary"
+					scrollable
+					[(ngModel)]="segmentModel"
+					(ionChange)="segmentChanged($event)"
+					class="ion-no-padding">
+
+					<ion-segment-button (click)="selectMenu(null)" value="all">
+						<ion-label>All</ion-label>
+					</ion-segment-button>
+
+					<ion-segment-button *ngFor="let menu of foodMenusSource" [value]="i"
+										(click)="selectMenu(menu)">
+						<ion-label>{{ menu.name }}</ion-label>
+					</ion-segment-button>
+
+				</ion-segment>
+			</div>
+		</ion-card>
+	</ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-no-margin ion-no-padding">
+	<ion-card class="food-menu" *ngFor="let menu of foodMenus; let i index">
+		<div class="category-wrap nf4">
+			<h3>
+				{{ menu.name }}
+			</h3>
+			<div class="desc" *ngIf="menu.description">
+				{{ menu.description }}
+			</div>
+		</div>
+		<ion-grid class="ion-no-padding">
+			<ion-row class="dish-item" *ngFor="let item of menu.items; let i index">
+				<div class="dish-item-inner">
+					<div *ngIf="haveDishPhoto(item)" class="dish-photo-wrapper">
+						<img [src]="getDishPic(item)" alt=""/>
+					</div>
+
+					<div class="dish-text">
+						<div class="nf3 dish-name"
+							 style="font-weight: normal; font-size: 13pt;">{{ getItemName(item) }}</div>
+						<div class="nf3 dish-desc">{{ item.description }}</div>
+
+						<div class="dish-cat-wrapper" *ngIf="haveAllergren(item)">
+							<ion-chip class="dish-cat" *ngFor="let cat of item.allergies; let i index">
+								<ion-img [class]="getAllergenCss(cat)" [src]="getAllergenImg(cat)"></ion-img>
+							</ion-chip>
+						</div>
+					</div>
+				</div>
+
+				<div class="dish-price">
+					<p class="price nf3">
+						{{ item.price }} {{ item.symbol }}
+					</p>
+				</div>
+
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+</ion-content>

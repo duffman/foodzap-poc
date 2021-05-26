@@ -1,0 +1,142 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>dish</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-header [translucent]="true">
+
+	<ion-toolbar>
+		<ion-title>
+			Ionic Segments
+		</ion-title>
+	</ion-toolbar>
+
+	<ion-toolbar color="primary">
+
+		<ion-segment
+			value="all"
+			color="tertiary"
+			scrollable="true"
+			mode="ios"
+			[(ngModel)]="segmentModel"
+			(ionChange)="segmentChanged($event)">
+
+			<ion-segment-button value="info">
+				<ion-label>Info</ion-label>
+			</ion-segment-button>
+
+			<ion-segment-button value="allergies">
+				<ion-label>Allergies</ion-label>
+			</ion-segment-button>
+
+			<ion-segment-button value="photo">
+				<ion-label>Photo</ion-label>
+			</ion-segment-button>
+
+		</ion-segment>
+
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+	<ion-card *ngIf="segmentModel === 'all'">
+		<ion-card-header>
+			<ion-card-subtitle>Segment Content</ion-card-subtitle>
+			<ion-card-title>All</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<div style="color: #000000">
+				Keep close to Nature's heart... and break clear away, once in awhile,
+				and climb a mountain or spend a week in the woods. Wash your spirit clean.
+			</div>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card *ngIf="segmentModel === 'favorites'">
+		<ion-card-header>
+			<ion-card-subtitle>Segment Content</ion-card-subtitle>
+			<ion-card-title>Favorites</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<div style="color: #000000">
+				Keep close to Nature's heart... and break clear away, once in awhile,
+				and climb a mountain or spend a week in the woods. Wash your spirit clean.
+			</div>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card *ngIf="segmentModel === 'profile'">
+		<ion-card-header>
+			<ion-card-subtitle>Segment Content</ion-card-subtitle>
+			<ion-card-title>Profile</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<div style="color: #000000">
+				Keep close to Nature's heart... and break clear away, once in awhile,
+				and climb a mountain or spend a week in the woods. Wash your spirit clean.
+			</div>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card *ngIf="segmentModel === 'settings'">
+		<ion-card-header>
+			<ion-card-subtitle>Segment Content</ion-card-subtitle>
+			<ion-card-title>Settings</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<div style="color: #000000">
+				Keep close to Nature's heart... and break clear away, once in awhile,
+				and climb a mountain or spend a week in the woods. Wash your spirit clean.
+			</div>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card *ngIf="segmentModel === 'just'">
+		<ion-card-header>
+			<ion-card-subtitle>Segment Content</ion-card-subtitle>
+			<ion-card-title>Just</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<div style="color: #000000">
+				Keep close to Nature's heart... and break clear away, once in awhile,
+				and climb a mountain or spend a week in the woods. Wash your spirit clean.
+			</div>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card *ngIf="segmentModel === 'onemore'">
+		<ion-card-header>
+			<ion-card-subtitle>Segment Content</ion-card-subtitle>
+			<ion-card-title>One More</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<div style="color: #000000">
+				Keep close to Nature's heart... and break clear away, once in awhile,
+				and climb a mountain or spend a week in the woods. Wash your spirit clean.
+			</div>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card *ngIf="segmentModel === 'tofill'">
+		<ion-card-header>
+			<ion-card-subtitle>Segment Content</ion-card-subtitle>
+			<ion-card-title>To Fill</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<div style="color: #000000">
+				Keep close to Nature's heart... and break clear away, once in awhile,
+				and climb a mountain or spend a week in the woods. Wash your spirit clean.
+			</div>
+		</ion-card-content>
+	</ion-card>
+
+</ion-content>

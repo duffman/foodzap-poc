@@ -1,0 +1,248 @@
+/**
+ * Copyright (c) 2020 Patrik Forsberg <patrik.forsberg@coldmind.com> - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * 2020-05-17
+ */
+
+import { Request }             from "express";
+import { Response }            from "express";
+import { Router }              from "express";
+import { injectable }          from "inversify";
+import { inject }              from "inversify";
+import { BaseController }      from "@api/base.controller";
+import { Logger }              from "@cli/cli.logger";
+import { Inf }                 from "@core/interfaces";
+import { IgniterController }   from "@core/webcore/igniter.controller";
+import { FoodMenuAdminDbBeta } from "@modules/food-menu/fm-admin-db-beta";
+import { IDbResult }           from "@zynDb/db-result";
+import { DbTransaction }       from "@zynDb/db-transaction";
+import { IOkPacket }       from "@zynDb/types/mysql-ok-packet";
+import { SqlIgniter }      from "@zynDb/sql-igniter/sql-igniter";
+import { FoodMenuAdminDb } from "@modules/food-menu/fm-admin-db";
+import { FmDataValidator }     from "@modules/food-menu/fm-data-validator";
+import { FmPriceConverter }    from "@modules/food-menu/fm-price-converter";
+import { FoodMenuDb }          from "@modules/food-menu/fm.db";
+import { IFmCategory }         from "@modules/food-menu/models/fm-category";
+import { IFoodMenuPostData }   from "@modules/food-menu/models/food-menu-api-post.type";
+import { IFoodMenuItem }       from "@modules/food-menu/models/food-menu-item.type";
+
+@injectable()
+export class FoodMenuAdminController extends IgniterController {
+	debugMode: boolean;
+
+	constructor(
+		@inject(Inf.IFoodMenuDb) private menuDb: FoodMenuDb,
+		@inject(Inf.IFoodMenuAdminDb) private adminDb: FoodMenuAdminDb,
+		@inject(Inf.IFoodMenuAdminDbBeta) private betaDb: FoodMenuAdminDbBeta,
+		@inject(Inf.IFmPriceConverter) private priceConverter: FmPriceConverter
+	) {
+		super();
+	}
+
+	//
+	// Init Routes
+	//
+	public initRoutes(routes: Router): void {
+		routes.get('/executeNewRecord').bind(this)
+
+		routes.get("/fluid/new", this.debugMenuNew.bind(this));
+		routes.get("/fluid/update", this.debugMenuUpdate.bind(this));
+
+		routes.post("/restaurant/menu/add", this.addMenuItem.bind(this));
+		routes.post("/restaurant/menu/set", this.setMenu.bind(this));
+
+		// Add Menu Category
+		routes.post("/restaurant/menu/addcat", this.addMenuCategory.bind(this));
+	}
+
+	private debugMenuNew(req: Request, resp: Response): void {
+		Logger.logPurple('FmAdminController :: debugMenuNew');
+
+		let data = {
+			restaurant_id: 1,
+			weight: 22
+		};
+
+		this.betaDb.testNew(data).then(res => {
+			console.log('setFoodMenu ::', res);
+			resp.json(res);
+
+		}).catch(err => {
+			Logger.logError("setRecord :: error ::", err);
+			BaseController.extFatalError(req, resp);
+			resp.json(err);
+		});
+	}
+
+	private debugMenuUpdate(req: Request, resp: Response): void {
+		Logger.logPurple('FmAdminController :: debugMenuNew');
+
+		let data = {
+			id: 1,
+			restaurant_id: 1,
+			weight: 22
+		};
+
+		this.betaDb.testUpdate(data).then(res => {
+			console.log('setFoodMenu ::', res);
+			resp.json(res);
+
+		}).catch(err => {
+			Logger.logError("setRecord :: error ::", err);
+			BaseController.extFatalError(req, resp);
+			resp.json(err);
+		});
+	}
+
+	/**
+	 * Assign Menu Data
+	 * @param data
+	 */
+	public assignData(data: any): void {
+		this.adminDb.setFoodMenus(data).then(res => {
+			console.log('setFoodMenu ::', res);
+			console.log(res);
+
+		}).catch(err => {
+			Logger.logError("setRecord :: error ::", err);
+		});
+	}
+
+	/**
+	 * Set Menu
+	 * @param {e.Request} req
+	 * @param {e.Response} resp
+	 */
+	private setMenu(req: Request, resp: Response): void {
+		console.log('req.body.restaurantId', req.body);
+
+		let data: IFoodMenuPostData  = req.body;
+		let deletedItemIds: number[] = data.deletedItemIds;
+
+		console.log('::: IFoodMenuPostData ::', data);
+
+		for (let menu in data.foodMenus) {
+			let menuObj = data.foodMenus[menu];
+
+			for (let item of menuObj.items) {
+				//console.log('::: MENU :: ITEM ::', item);
+			}
+		}
+
+		if (FmDataValidator.foodMenusPostData(data) === false) {
+			BaseController.extFatalError(req, resp, "MENU_DATA_INVALID");
+			return;
+		}
+
+		//  this.adminDb.deleteFoodMenuItems(deletedItemIds);
+
+		this.adminDb.setFoodMenus(data).then(res => {
+			console.log('setFoodMenu ::', res);
+			resp.json(res);
+
+		}).catch(err => {
+			Logger.logError("setRecord :: error ::", err);
+			BaseController.extFatalError(req, resp);
+		});
+	}
+
+	/**
+	 *
+	 * @param menuId
+	 * @param catId
+	 * @param menuItem
+	 */
+	public addMenuItem(menuId: number, catId: number, menuItem: IFoodMenuItem): Promise<boolean> {
+		let scope   = this;
+		let dbTrans = new DbTransaction();
+		let result  = false;
+
+		async function beginTrans(): Promise<IOkPacket> {
+			return dbTrans.beginTransaction();
+		}
+
+		async function commitTrans(): Promise<boolean> {
+			return dbTrans.commit();
+		}
+
+		async function rollbackTrans(): Promise<boolean> {
+			return dbTrans.rollback();
+		}
+
+		async function executeQuery(sql: string): Promise<IDbResult> {
+			return dbTrans.executeQuery(sql);
+		}
+
+		async function addItemTranslation(): Promise<boolean> {
+			return new Promise((resolve, reject) => {
+				resolve(true);
+			});
+		}
+
+		/**
+		 * Add Food Menu Item
+		 * @returns {Promise<void>}
+		 */
+		async function addMenuItem(): Promise<void> {
+			await beginTrans();
+			let dynSql = new SqlIgniter();
+
+			let dbData = {
+				"food_menu_id": menuId,
+				"item_cat_id":  catId,
+				"item_ref":     menuItem.ref,
+				"weight":       0
+			};
+
+			let dbRes     = await executeQuery(dynSql.toSql());
+			let newItemId = dbRes.lastInsertId;
+
+			Logger.logPurple("LAST INSERT ID ::", newItemId);
+		}
+
+		return new Promise((resolve, reject) => {
+			addMenuItem().then(() => {
+				resolve(result);
+			})
+		});
+	}
+
+	/**
+	 * Add Menu Category
+	 * @param {e.Request} req
+	 * @param {e.Response} resp
+	 */
+	public addMenuCategory(req: Request, resp: Response): void {
+		/*
+		{
+			"menuId":        1,
+			"languageId":    1,
+			"field":          "Snaskrätter",
+			"description":   "Goda Härliga smaskrätter",
+			"footer":        "Ska vi verkligen har Footer??",
+			"weight":        2
+		}
+		*/
+
+		console.log("*** addMenuCategory");
+
+		let categoryData: IFmCategory = {
+			id:          req.body.id,
+			menuId:      req.body.menuId,
+			languageId:  req.body.languageId,
+			name:        req.body.name,
+			description: req.body.description,
+			footer:      req.body.footer,
+			weight:      req.body.weight
+		};
+
+		console.log("addMenuCategory ::", categoryData);
+
+		this.adminDb.setCategory(categoryData).then(res => {
+			resp.json(res);
+		}).catch(err => {
+			resp.json(err);
+		});
+	}
+}

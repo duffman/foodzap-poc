@@ -1,0 +1,31 @@
+{
+	"disqualifier": "ILF7151212",
+	"langName": {
+		"id": 234,
+		"native": "English",
+		"int": "English"
+	},
+	"app": {
+		"not-found": {
+			"title": "Vyn hittades inte",
+			"desc": "Raffe Bananas"
+		},
+		"modules": {
+			"test": "Kalle Anka"
+
+		},
+		"name": "Backend Igniter",
+		"desc": "This tab is a nasty little cock-factory!",
+		"tabs": [
+			{
+				"start": {
+					"title": "Start Page"
+				},
+
+				"dyncontent": {
+					"title": "Dynamic Content"
+				}
+			}
+		]
+	}
+}

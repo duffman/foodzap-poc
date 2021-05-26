@@ -1,0 +1,174 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>
+			Redigera meny
+		</ion-title>
+		<ion-buttons slot="end">
+			<ion-button (click)="debugData()">Debug</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+
+	<ion-toolbar>
+		<ion-segment color="primary" [(ngModel)]="topTabs" class="ion-padding-horizontal">
+			<ion-segment-button value="menus">
+				<ion-icon src="assets/icon/tabs/tab-menu.svg"></ion-icon>
+			</ion-segment-button>
+			<ion-segment-button value="dishes">
+				<ion-icon name="restaurant"></ion-icon>
+			</ion-segment-button>
+		</ion-segment>
+	</ion-toolbar>
+
+	<ion-grid class="save-block" *ngIf="this.menuChanged">
+		<ion-row>
+			<ion-col>
+				<ion-button (click)="revertChanges()" expand="full" class="btn btn-yellow">
+					<ion-icon name="arrow-undo-outline"></ion-icon>
+					Ångra ändringar &#40;{{ numberOfChanges }}&#41;
+				</ion-button>
+			</ion-col>
+			<ion-col>
+				<ion-button (click)="saveMenu()" class="btn-green" expand="full">
+					<ion-icon name="save-outline"></ion-icon>
+					Spara
+				</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+</ion-header>
+
+<ion-content class="ion-no-margin ion-no-padding">
+
+	<div [ngSwitch]="topTabs" class="">
+
+		<!----------------------------------------------------------->
+		<!--  Menus                                                -->
+		<!----------------------------------------------------------->
+		<div *ngSwitchCase="'menus'">
+			<ion-card class="food-menu">
+				<div class="category-wrap nf4">
+
+					<ion-grid>
+						<ion-row>
+							<ion-col>
+								<h3>
+									Menyer
+								</h3>
+								<!--<div class="description">
+									Använd dessa som sektioner i er meny, t ex <b>Varmrätter</b>.
+								</div>-->
+
+							</ion-col>
+							<ion-col class="ion-text-end" style="padding-top: 20px">
+								<ion-button (click)="editMenu()">Lägg till meny</ion-button>
+
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+
+				</div>
+				<ion-grid class="ion-no-padding">
+
+					<ion-row *ngIf="foodMenus">
+						<ion-col>
+							<div>
+								<ion-list lines="none">
+									<ion-reorder-group (ionItemReorder)="reorderMenu($event)" disabled="false">
+										<ion-item *ngFor="let menu of foodMenus"
+												  (click)="selectMenu(menu)"
+												  [className]="getFoodMenuClass(menu)">
+
+											<ion-reorder slot="start"></ion-reorder>
+
+											<ion-grid>
+												<ion-row>
+													<ion-col *ngIf="menu">
+														<h3>{{ menu.name }}</h3>
+														<div class="desc">
+															{{ menu.desc }}
+														</div>
+													</ion-col>
+
+													<ion-col *ngIf="!menu">
+														Menu ERROR
+													</ion-col>
+
+												</ion-row>
+											</ion-grid>
+
+											<ion-icon (click)="editMenu(menu)" name="create-outline" slot="end"></ion-icon>
+											<ion-icon (click)="removeMenu(menu)" name="trash-outline" slot="end"></ion-icon>
+
+										</ion-item>
+									</ion-reorder-group>
+								</ion-list>
+							</div>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+
+			</ion-card>
+		</div>
+
+		<!----------------------------------------------------------->
+		<!--  Dishes                                               -->
+		<!----------------------------------------------------------->
+		<div *ngSwitchCase="'dishes'">
+			<ion-card class="food-menu ion-no-margin" *ngFor="let menu of foodMenus; let i index">
+				<div class="category-wrap nf4">
+					<ion-grid>
+						<ion-row>
+							<ion-col style="padding-left: 1em; padding-bottom: 1.5em">
+								<h3 style="margin-top: 10px">
+									{{ menu.name }}
+								</h3>
+								<span class="desc" *ngIf="menu.description">
+									{{ menu.description }}
+								</span>
+
+							</ion-col>
+							<ion-col class="ion-text-end" style="padding-top: 15px">
+								<ion-button color="primary" fill="outline" (click)="openCategoryMenu($event, menu.id)"
+									style="padding-right: 5px; padding-left: 15px;">
+									<ion-icon name="ellipsis-horizontal"></ion-icon>
+								</ion-button>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</div>
+				<ion-grid class="ion-no-padding">
+
+					<ion-reorder-group (ionItemReorder)="reorderItems($event, menu.id)" class="food-menu" disabled="false">
+
+						<ion-item-sliding *ngFor="let item of menu.items">
+							<app-dish-row
+								[manager]="manager"
+								[showReorderSlot]="menu.items.length > 1"
+								[item]="item">
+							</app-dish-row>
+
+							<ion-item-options style="background: #b4151a" side="end">
+								<ion-item-option (click)="removeDish(item)" style="background: #b4151a;">
+									<ion-icon color="white" name="trash"></ion-icon>
+								</ion-item-option>
+							</ion-item-options>
+						</ion-item-sliding>
+
+					</ion-reorder-group>
+
+				</ion-grid>
+			</ion-card>
+		</div> <!-- // end Switch Container -->
+
+			   <!--
+			   <ion-fab slot="fixed">
+				   <ion-fab-button type="md">Button</ion-fab-button>
+			   </ion-fab>
+			   -->
+	</div>
+
+</ion-content>

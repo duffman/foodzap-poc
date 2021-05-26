@@ -1,0 +1,145 @@
+/**
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * @author: Patrik Forsberg <patrik.forsberg@coldmind.com>
+ * @date: March 2020
+ */
+
+import { Languages }                       from "./languages";
+import * as querystring                    from "querystring";
+//import * as safeEval                       from "safe-eval";
+var safeEval = require('safe-eval');
+var token = require('google-translate-token');
+
+export class GoogleTranslateApiTs {
+	constructor() {
+
+		this.translate('I spea Dutch!', {from: 'en', to: 'nl'}).then(res => {
+			/*console.log(res.text);
+			//=> Ik spreek Nederlands!
+			console.log(res.from.text.autoCorrected);
+			//=> true
+			console.log(res.from.text.value);
+			//=> I [speak] Dutch!
+			console.log(res.from.text.didYouMean);
+			//=> false
+			*/
+		}).catch(err => {
+			console.error(err);
+		});
+	}
+
+	public translate(text, opts) {
+		opts = opts || {};
+
+		var e;
+		[opts.from, opts.to].forEach(function (lang) {
+			if (lang && !Languages.isSupported(lang)) {
+				e = new Error();
+				e.restaurantId = 400;
+				e.message = 'The language \'' + lang + '\' is not supported';
+			}
+		});
+		if (e) {
+			return new Promise((resolve, reject) => {
+				reject(e);
+			});
+		}
+
+		opts.from = opts.from || 'auto';
+		opts.to = opts.to || 'en';
+
+		opts.from = Languages.getCode(opts.from);
+		opts.to = Languages.getCode(opts.to);
+
+		return token.get(text).then(token => {
+			var url = 'https://translate.google.com/translate_a/single';
+			var data = {
+				client: 't',
+				sl: opts.from,
+				tl: opts.to,
+				hl: opts.to,
+				dt: ['at', 'bd', 'ex', 'ld', 'md', 'qca', 'rw', 'rm', 'ss', 't'],
+				ie: 'UTF-8',
+				oe: 'UTF-8',
+				otf: 1,
+				ssel: 0,
+				tsel: 0,
+				kc: 7,
+				q: text
+			};
+			data[token.field] = token.value;
+
+			return url + '?' + querystring.stringify(data);
+
+		}).then(url => {
+			console.log("URL ::", url);
+			/*return got(url).then((res) => {
+				var result = {
+					text: '',
+					from: {
+						language: {
+							didYouMean: false,
+							iso: ''
+						},
+						text: {
+							autoCorrected: false,
+							value: '',
+							didYouMean: false
+						}
+					},
+					raw: ''
+				};
+
+				if (opts.raw) {
+					result.raw = res.body;
+				}
+
+				var body = safeEval(res.body);
+				body[0].forEach(function (obj) {
+					if (obj[0]) {
+						result.text += obj[0];
+					}
+				});
+
+				if (body[2] === body[8][0][0]) {
+					result.from.language.iso = body[2];
+				} else {
+					result.from.language.didYouMean = true;
+					result.from.language.iso = body[8][0][0];
+				}
+
+				if (body[7] && body[7][0]) {
+					var str = body[7][0];
+
+					str = str.replace(/<b><i>/g, '[');
+					str = str.replace(/<\/i><\/b>/g, ']');
+
+					result.from.text.value = str;
+
+					if (body[7][5] === true) {
+						result.from.text.autoCorrected = true;
+					} else {
+						result.from.text.didYouMean = true;
+					}
+				}
+
+				return result;
+
+			}).catch((err) => {
+				var e;
+				e = new Error();
+				if (err.statusCode !== undefined && err.statusCode !== 200) {
+					e.id = 'BAD_REQUEST';
+				} else {
+					e.id = 'BAD_NETWORK';
+				}
+				throw e;
+			});
+			*/
+
+		});
+	}
+}
+
+let test = new GoogleTranslateApiTs();

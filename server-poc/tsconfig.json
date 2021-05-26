@@ -1,0 +1,42 @@
+{
+	"compilerOptions": {
+		"lib": ["es6", "dom" ],
+		"types": ["node", "reflect-metadata", "inversify"],
+		"module": "commonjs",
+		"target": "ESNEXT",
+		"noImplicitAny": false,
+		"sourceMap": false,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"outDir": "./dist",
+		"baseUrl": "./",
+		"paths": {
+			"@root/*"         : ["./*"],
+			"@app/*"          : ["./app/*"],
+			"@api/*"          : ["./app/controllers/*"],
+			"@appDb/*"        : ["./app/database/*"],
+			"@models/*"       : ["./app/models/*"],
+			"@zynDb/*"        : ["./core/db-igniter/*"],
+			"@modules/*"      : ["./app/modules/*"],
+			"@core/*"         : ["./core/*"],
+			"@cli/*"          : ["./core/cli/*"],
+			"@utils/*"        : ["./utils/*"],
+			"@networking/*"   : ["./core/networking/*"],
+			"@lib/*"          : ["./lib/*"],
+			"@libutils/*"     : ["./lib/utils/*"],
+			"@putte/*"        : ["./lib/node-tsutils/*"],
+			"@environments/*" : ["../environments/*"]
+		}
+	},
+	"exclude": [
+		"app/_test",
+		"core/_test",
+		"realtime-server",
+		"test",
+		"admin",
+		"app/modules/food-menu/back",
+		"dashboard-app",
+		"node_modules",
+		"zynaptic.cli"
+	]
+}

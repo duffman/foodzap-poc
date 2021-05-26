@@ -1,0 +1,58 @@
+{
+	"allowedCORSOrigins": "*",
+	"sessionCookieKey": "kaknyckel",
+	"sessionSecret": "1gulka9n",
+	"jwtSecret": "SimonBrännströmÄrEnLitenFitta",
+
+	"caching": {
+		"cacheTTL": "days:10"
+	},
+
+	"mongoDb": {
+		"mongoDbUrl": "mongodb://localhost:27017/TopZapDB"
+	},
+
+		"serverMode": {
+		"local": {
+			"domain": "localhost",
+			"listenHost": "0.0.0.0",
+			"listenPort": 8080,
+			"debugMode": "verbose",
+
+			"cors": {
+				"credentials": true,
+				"origin": "*",
+				"useOldCorsMode": false
+			},
+
+			"database": {
+				"dbName": "appetizer_back",
+				"dbHost": "localhost",
+				"dbUser": "duffman",
+				"dbPass": "bjoe7151212"
+			},
+			"wwwRoot": "/Users/patrikforsberg/TheRise/wizum.node.backend.git/wwwroot"
+		},
+
+		"live": {
+			"domain": "coldmind.com",
+			"listenHost": "0.0.0.0",
+			"listenPort": 8080,
+			"debugMode": "verbose",
+
+			"cors": {
+				"credentials": true,
+				"origin": "*",
+				"useOldCorsMode": false
+			},
+
+			"database": {
+				"dbName": "appetizer_back",
+				"dbHost": "localhost",
+				"dbUser": "duffman",
+				"dbPass": "bjoe7151212"
+			},
+			"wwwRoot": "/raffe/spenat"
+		}
+	}
+}

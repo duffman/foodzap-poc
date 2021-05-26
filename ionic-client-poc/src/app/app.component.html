@@ -1,0 +1,43 @@
+<ion-app>
+	<ion-split-pane contentId="menu-content" when="false">
+		<ion-menu *ngIf="showSideMenu()" id="app-side-menu" contentId="menu-content" class="app-sidemenu">
+			<ion-header class="logo">
+				<div style="padding: 20px">
+					<ion-img src="./assets/img/logo/foodzap-logo-compact-green.png" style=""></ion-img>
+				</div>
+				<ion-menu-button></ion-menu-button>
+			</ion-header>
+
+			<ion-menu-toggle auto-hide="false">
+				<ion-card>
+					<ion-list>
+						<ion-list-header>
+							<ion-icon name="restaurant-outline"></ion-icon>
+							<ion-label>Min Restaurang</ion-label>
+						</ion-list-header>
+						<ion-item [routerLink]="['/admin/restaurant']">
+							Min Restaurang
+						</ion-item>
+						<ion-item [routerLink]="['/admin/restaurant-menu']">
+							Menyer
+						</ion-item>
+						<ion-item [routerLink]="['/admin/restaurant-home']">
+							Rätter
+						</ion-item>
+					</ion-list>
+				</ion-card>
+			</ion-menu-toggle>
+
+			<ion-card>
+				<ion-button expand="full" (click)="logOut()">
+					<ion-icon name="log-out"></ion-icon>
+					Logga ut
+				</ion-button>
+			</ion-card>
+
+		</ion-menu>
+
+		<ion-router-outlet id="menu-content"></ion-router-outlet>
+
+	</ion-split-pane>
+</ion-app>

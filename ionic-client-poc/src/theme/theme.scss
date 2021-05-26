@@ -1,0 +1,248 @@
+/******************************************************************************
+*
+*
+*    Food Zap Theme 0.7.9
+*
+*
+******************************************************************************/
+
+ion-content {
+}
+
+.gradient {
+	--background-color: rgb(0, 159, 255) !important;
+	--background: linear-gradient(351deg, rgba(0, 159, 255, 1) 0%, rgba(113, 192, 255, 1) 35%, rgba(0, 212, 255, 1) 100%) !important;
+}
+
+.label-stacked.sc-ion-label-md-h, .label-floating.sc-ion-label-md-h {
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-left: 0;
+}
+
+.logo {
+	--background: transparent;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+
+	.wrapper-img {
+		align-self: center;
+		align-content: center;
+		padding: 40px;
+		padding-bottom: 15px;
+
+		ion-img {
+			max-width: 500px;
+		}
+
+	}
+}
+
+ion-toolbar {
+	--color: #ffffff;
+
+	/* Angular Blue
+	--background: #2376d2;
+	*/
+
+	--background: linear-gradient(145deg, #347eff, #09f) !important;
+
+	/*
+	--background: linear-gradient(145deg, #347eff, #09f) !important;
+	 */
+	--color: #ffffff;
+}
+
+ion-tab-bar {
+	--background: #0f8ce2 !important;
+	--color: #ffffff !important;
+
+	ion-tab-button {
+		–color-selected: #ffffff !important;
+	}
+
+	.tab-selected {
+		.ionicon {
+			stroke: lime !important;
+		}
+
+		ion-icon {
+			svg {
+				stroke: #e0d10f !important;
+			}
+		}
+
+		--background: #2ea0ff;
+		background: #2ea0ff;
+
+		ion-ripple-effect {
+		}
+	}
+
+	ion-tab-button:hover {
+		--color: lime !important;
+	}
+}
+
+ion-item {
+	ion-icon {
+	}
+
+	ion-label {
+		padding-left: 10px;
+	}
+}
+
+/**
+Buttons
+ */
+ion-button {
+	--border-radius: 15px !important;
+	border-radius: 15px !important;
+
+	--ion-font-family: 'PT Sans', sans-serif;
+	font-family: var(--ion-font-family) !important;
+	font-weight: bold;
+}
+
+.btn {
+	--border-radius: 15px !important;
+	border-radius: 15px !important;
+
+	--ion-font-family: 'PT Sans', sans-serif;
+	font-family: var(--ion-font-family) !important;
+	font-weight: bold;
+}
+
+.btn-green {
+	background-color: #1cc25d !important;
+	--background: #1cc25d !important;
+	--box-shadow: none !important;
+}
+
+.btn-green:active {
+	background-color: #0a890a !important;
+	--background: #1cc25d !important;
+}
+
+.btn-blue {
+	background-color: #0f8ce2 !important;
+	--background: #0f8ce2 !important;
+	--box-shadow: none !important;
+}
+
+.btn-blue:active {
+	background-color: #00AFFF !important;
+	--background: #00AFFF !important;
+}
+
+.btn-yellow {
+	background-color: #e0d10f !important;
+	--background: #e0d10f !important;
+	--box-shadow: none !important;
+	--color: #000000;
+}
+
+.btn-yellow:active {
+	background-color: #ffeb03 !important;
+	--background: #ffeb03 !important;
+}
+
+.btn-gray {
+	background-color: #cecece !important;
+	--background: #d2d2d2 !important;
+	--box-shadow: none !important;
+}
+
+.btn-gray:active {
+	background-color: #d2d2d2 !important;
+	--background: #d2d2d2 !important;
+	--box-shadow: none !important;
+}
+
+/*
+ */
+
+.modal-fullscreen {
+	.modal-wrapper {
+		position: absolute !important;
+		top: 0 !important;
+		left: 0 !important;
+		display: block !important;
+		width: 100% !important;
+		height: 100% !important;
+	}
+}
+
+ion-button {
+	ion-badge {
+		position: absolute;
+		top: -0.2rem;
+		right: -0.2rem;
+		opacity: 0.9;
+
+		& ~ ion-icon {
+			margin-right: 1.2rem;
+		}
+	}
+}
+
+header {
+	padding-bottom: 40px !important;
+	background: lime;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+}
+
+.app-box {
+	--border-radius: 20px !important;
+	border-radius: 20px;
+	padding: 10px 20px;
+
+	.flat {
+		--border: none !important;
+		--border-radius: 0 !important;
+		border-radius: 0;
+		border: none !important;
+		padding: 0;
+	}
+}
+
+.food-menu {
+	color: #000000 !important;
+	margin: 0 0 0.5rem 0 !important;
+
+	.category-wrap {
+		padding: 0.5rem;
+		padding-right: 0;
+
+		h3 {
+			font-size: 18pt;
+			margin-bottom: 0.3rem !important;
+		}
+
+		.desc {
+			margin-bottom: 0.5rem !important;
+		}
+	}
+
+	.dish-cat-wrapper {
+		padding-top: 10px;
+
+		.dish-cat:first-child {
+			margin-left: 0;
+		}
+
+		.dish-cat {
+			height: initial !important;
+			padding: 0 !important;
+			margin-right: 0 !important;
+			--padding: 0 !important;
+			--margin-bottom: 2px;
+			--margin-right: 0 !important;
+			--color: #000000;
+		}
+	}
+}

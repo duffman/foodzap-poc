@@ -1,0 +1,16 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>
+			{{ getTitle() }}
+		</ion-title>
+		<ion-buttons slot="end">
+			<ion-button (click)="debugData()">
+				<ion-icon name="bug-outline"></ion-icon>
+			</ion-button>
+			<ion-button (click)="goToCart()">
+				<ion-icon name="cart"></ion-icon>
+				<ion-badge color="primary">{{ getBasketCount() }}</ion-badge>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>

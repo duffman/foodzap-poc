@@ -1,0 +1,224 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+
+		<ion-title>Restaurant</ion-title>
+	</ion-toolbar>
+
+	<ion-toolbar>
+		<ion-segment color="primary" [(ngModel)]="topTabs" class="ion-padding-horizontal">
+			<ion-segment-button value="info">
+				<ion-icon name="restaurant"></ion-icon>
+			</ion-segment-button>
+			<ion-segment-button value="hours">
+				<ion-icon name="time"></ion-icon>
+			</ion-segment-button>
+			<ion-segment-button value="map">
+				<ion-icon name="earth"></ion-icon>
+			</ion-segment-button>
+			<ion-segment-button value="settings">
+				<ion-icon name="construct"></ion-icon>
+			</ion-segment-button>
+		</ion-segment>
+	</ion-toolbar>
+
+	<ion-grid class="save-block gradient" *ngIf="isModified">
+		<ion-row>
+			<ion-col>
+				<ion-button (click)="revertChanges()" expand="full" class="btn-yellow">
+					<ion-icon name="arrow-undo-outline"></ion-icon>
+					Ångra ändringar &#40;{{ numberOfChanges }}&#41;
+				</ion-button>
+			</ion-col>
+			<ion-col>
+				<ion-button (click)="saveMenu()" class="btn-green" expand="full">
+					<ion-icon name="save-outline"></ion-icon>
+					Spara
+				</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+</ion-header>
+
+<style>
+	.cover {
+		position: relative !important;
+		background-repeat: no-repeat !important;;
+		background-position: center center !important;;
+		background-attachment: fixed !important;;
+		background-size: cover !important;
+		min-height: 200px;
+		max-height: 200px;
+	}
+
+	.cover-image {
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		max-height: 400px;
+	}
+</style>
+
+<ion-content>
+	<div [ngSwitch]="topTabs" class="">
+		<div *ngSwitchCase="'info'">
+			<div class="ion-no-padding ion-no-margin">
+				<div class="cover" [style.background]="'url(' + coverImage + ')'">
+					<!--<img [src]="coverImage" class="cover-image">-->
+
+					<ion-fab slot="fixed" style="bottom: 50%; left: 10px">
+						<ion-fab-button (click)="takeLogoPhoto()">
+							<ion-icon name="camera"></ion-icon>
+							Lägg till Logotyp
+						</ion-fab-button>
+					</ion-fab>
+
+
+					<ion-fab slot="fixed" style="bottom: 10px; right: 10px">
+						<ion-fab-button (click)="takeCoverPhoto()">
+							<ion-icon name="camera"></ion-icon>
+						</ion-fab-button>
+					</ion-fab>
+				</div>
+
+
+				<form [formGroup]="infoForm" (ngSubmit)="onSubmitInfo(infoForm.value)">
+					<ion-list class="inputs-list" lines="full">
+
+						<!-- NAME -->
+						<ion-item class="input-item">
+							<ion-input type="name"
+									   placeholder="Restaurangens namn"
+									   formControlName="name"
+									   clearInput
+									   autocapitalize="off"
+									   inputmode="text">
+							</ion-input>
+						</ion-item>
+						<div class="error-container">
+							<ng-container *ngFor="let validation of formValidationMessages.name">
+								<div class="error-message"
+									 *ngIf="infoForm.get('name').hasError(validation.type) && (infoForm.get('name').dirty || infoForm.get('name').touched)">
+									<ion-icon name="information-circle-outline"></ion-icon>
+									<span>{{ validation.message }}</span>
+								</div>
+							</ng-container>
+						</div>
+						<!-- // END NAME -->
+
+						<!-- EMAIL -->
+						<ion-item class="input-item">
+							<ion-input type="email"
+									   placeholder="Email"
+									   formControlName="email"
+									   clearInput
+									   autocapitalize="off"
+									   inputmode="email">
+							</ion-input>
+						</ion-item>
+						<div class="error-container">
+							<ng-container *ngFor="let validation of formValidationMessages.email">
+								<div class="error-message"
+									 *ngIf="infoForm.get('email').hasError(validation.type) && (infoForm.get('email').dirty || infoForm.get('email').touched)">
+									<ion-icon name="information-circle-outline"></ion-icon>
+									<span>{{ validation.message }}</span>
+								</div>
+							</ng-container>
+						</div>
+						<!-- // END EMAIL -->
+
+						<!-- ADDRESS -->
+						<ion-item class="input-item">
+							<ion-input type="email"
+									   placeholder="Email"
+									   formControlName="email"
+									   clearInput
+									   autocapitalize="off"
+									   inputmode="email">
+							</ion-input>
+						</ion-item>
+						<div class="error-container">
+							<ng-container *ngFor="let validation of formValidationMessages.email">
+								<div class="error-message"
+									 *ngIf="infoForm.get('email').hasError(validation.type) && (infoForm.get('email').dirty || infoForm.get('email').touched)">
+									<ion-icon name="information-circle-outline"></ion-icon>
+									<span>{{ validation.message }}</span>
+								</div>
+							</ng-container>
+						</div>
+						<!-- // END EMAIL -->
+
+					</ion-list>
+
+				</form>
+			</div>
+
+		</div>
+		<div *ngSwitchCase="'hours'">
+			<ion-list>
+				<ion-item *ngFor="let timeSlot of openHours.openHours">
+					<ion-checkbox [checked]="!getDisabled(timeSlot)" (ionChange)="openHoursCheckChange(timeSlot)" slot="start"></ion-checkbox>
+					<ion-label>{{ getDayName(timeSlot) }}</ion-label>
+
+					<ion-grid>
+						<ion-row>
+							<ion-col>
+								<ion-label>Öppnar</ion-label>
+								<ion-datetime
+									cancel-text="Avbryt"
+									done-text="Välj"
+									displayFormat="HH:mm"
+									minuteValues="0,15,30,45"
+									[disabled]="getDisabled(timeSlot)"
+									[value]="formatTime(timeSlot.openTime)">
+								</ion-datetime>
+							</ion-col>
+							<ion-col>
+								<ion-label>Stänger</ion-label>
+								<ion-datetime
+									cancel-text="Avbryt"
+									done-text="Välj"
+									displayFormat="HH:mm" minuteValues="0,15,30,45"
+									[disabled]="getDisabled(timeSlot)"
+									[value]="formatTime(timeSlot.closeTime)">
+								</ion-datetime>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+
+				</ion-item>
+			</ion-list>
+		</div>
+		<div *ngSwitchCase="'map'">
+			<ion-button (click)="leafletMap()">Test</ion-button>
+			<ion-item (click)="onpickupClick()">
+				<ion-icon slot="start" name="locate"></ion-icon>
+				<ion-label position="stacked">Pickup Location</ion-label>
+				<ion-textarea style="margin-top:20px;">{{ pickupLocation }}</ion-textarea>
+			</ion-item>
+
+			<ion-item>
+				<div id="mapId" style="width: 100%; height: 100%"></div>
+			</ion-item>
+
+		</div>
+		<div *ngSwitchCase="'settings'">
+			<ion-list>
+				<ion-item>
+					<ion-select>
+						<ion-select-option></ion-select-option>
+					</ion-select>
+				</ion-item>
+				<ion-item>
+					<ion-label>I accept terms and conditions</ion-label>
+					<ion-checkbox value="">Vi erbjuder Hemleverans</ion-checkbox>
+				</ion-item>
+			</ion-list>
+
+		</div>
+	</div>
+
+</ion-content>

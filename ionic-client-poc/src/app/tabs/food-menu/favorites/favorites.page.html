@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-title>
+			Favoriter
+		</ion-title>
+		<ion-button (click)="goToCart()">
+			<ion-icon name="cart"></ion-icon>
+		</ion-button>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-list>
+		<ion-item *ngFor="let item of favorites; let i">
+			<ion-item-divider>Restaurang</ion-item-divider>
+			<ion-label>{{ item.name }}</ion-label>
+			<p>
+				{{ item.desc }}
+			</p>
+		</ion-item>
+	</ion-list>
+</ion-content>

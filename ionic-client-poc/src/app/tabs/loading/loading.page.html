@@ -1,0 +1,28 @@
+<ion-content>
+	<ion-card>
+		<ion-card-content>
+
+			<div class="loader-wrap">
+				<div class="lottie">
+					<lottie-player
+						autoplay
+						loop
+						src="./assets/lottie/qr.json"
+						class="player">
+					</lottie-player>
+				</div>
+
+			</div>
+
+			<div class="loader-wrap">
+				<h1 style="align-self: center; padding-top: 30px;">Hämtar restaurang...</h1>
+			</div>
+
+
+			<ion-card>
+				<ion-button (click)="abortLoading()" color="primary" expand="full">Avbryt</ion-button>
+			</ion-card>
+
+		</ion-card-content>
+	</ion-card>
+</ion-content>

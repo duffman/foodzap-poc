@@ -1,0 +1,17 @@
+{
+	"disqualifier": "ILF7191A12",
+	"langName": {
+		"id": 966,
+		"native": "Язык",
+		"int": "Russian"
+	},
+	"app": {
+		"name": "AAA Baxkski Ignitzky",
+		"desc": "Это ужасный маленький заводчик петухов",
+		"tabs": [
+			{
+				"name": "Первая закладка"
+			}
+		]
+	}
+}

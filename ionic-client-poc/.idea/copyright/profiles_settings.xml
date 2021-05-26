@@ -1,0 +1,8 @@
+<component name="CopyrightManager">
+  <settings default="Ionic Igniter">
+    <module2copyright>
+      <element module="All" copyright="Ionic Igniter" />
+      <element module="Project Files" copyright="Ionic Igniter" />
+    </module2copyright>
+  </settings>
+</component>

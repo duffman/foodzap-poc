@@ -1,0 +1,41 @@
+@import "~leaflet/dist/leaflet.css";
+
+.tmp1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 1;
+	box-shadow: inset 0 0 15rem rgba(var(--ion-color-primary-rgb), 0.95);
+}
+
+ion-tab-bar {
+	ion-tab-button {
+		.tab-selected {
+			--background: lime !important;
+		}
+
+	}
+}
+
+ion-segment-button.segment-button-checked {
+	background-color: lime !important;
+	--indicator-height: 0 !important;
+}
+
+ion-segment-button {
+	.segment-button-checked {
+		--indicator-height: 0 !important;
+	}
+}
+
+ion-segment {
+	padding: 0 !important;
+
+	ion-segment-button {
+		.segment-button-checked {
+			--indicator-height: 0 !important;
+		}
+	}
+}

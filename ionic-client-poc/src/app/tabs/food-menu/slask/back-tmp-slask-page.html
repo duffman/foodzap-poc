@@ -1,0 +1,67 @@
+<div style="margin-right: 20px; position: relative">
+	<ion-card style="
+					background: #ffffff;
+					border-top-left-radius: 10px;
+					border-top-right-radius: 10px;
+					width: 100%;
+					position: absolute;
+					">
+		<ion-card *ngIf="loading">
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<ion-spinner name="lines"></ion-spinner>
+					</ion-col>
+					<ion-col>
+						Hämtar meny...
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-card>
+
+		<ion-list *ngIf="!loading" class="food-menu" lines="">
+			<ion-item-group *ngFor="let menu of foodMenus; let i index">
+
+				<ion-item-divider class="dish-cat">
+					<ion-grid>
+						<ion-row>
+							<h3>
+								<span *ngIf="inDebugMode()">
+									{{ menu.id }}
+								</span>
+								{{ menu.name }}
+							</h3>
+						</ion-row>
+						<ion-row *ngIf="menu.description" style="padding-bottom: 10px">
+							{{ menu.description }}
+						</ion-row>
+					</ion-grid>
+				</ion-item-divider>
+
+				<ion-item class="dish" detail lines="none" detailIcon="none" *ngFor="let item of menu.items; let i index">
+
+					<div class="dish-item" *ngFor="let cat of item.categories; let i index">
+						<div class="dish-item-inner">
+							<div *ngIf="haveDishPhoto(item)" class="dish-photo-wrapper">
+								<img [src]="getDishPic(item)" />
+							</div>
+
+							<div class="dish-text">
+								<div class="dish-name">{{ getItemName(item) }}</div>
+								<p>{{ item.description }}</p>
+							</div>
+						</div>
+
+						<div class="dish-price">
+							<p class="price">
+								{{ item.price }} {{ item.symbol }}
+							</p>
+						</div>
+					</div>
+
+				</ion-item>
+
+			</ion-item-group>
+		</ion-list>
+	</ion-card>
+</div>

@@ -1,0 +1,152 @@
+<!--<app-cart-header [text]="restaurantName">
+</app-cart-header>
+-->
+
+<ion-toolbar class="category-toolbar" style="min-height: 0">
+	<ion-card class="card-wrapper">
+
+		<div class="category-bar">
+			<ion-segment
+					value="all"
+					color="tertiary"
+					mode="ios"
+
+					scrollable
+
+					[(ngModel)]="segmentModel"
+					(ionChange)="segmentChanged($event)">
+
+				<ion-segment-button (click)="selectMenu(null)" value="all">
+					<ion-label>All</ion-label>
+				</ion-segment-button>
+
+				<ion-segment-button *ngFor="let menu of foodMenusSource" [value]="i" (click)="selectMenu(menu)">
+					<ion-label>{{ menu.name }}</ion-label>
+				</ion-segment-button>
+
+			</ion-segment>
+		</div>
+	</ion-card>
+</ion-toolbar>
+
+
+<ion-content class="ion-no-margin ion-no-padding">
+
+	<ion-card *mgIf="inDebugMode()">
+		<ion-button (click)="debugData()">
+			Debug
+		</ion-button>
+	</ion-card>
+
+	<div style="display: none" class="restaurant-header">
+		<ion-img [src]="restaurantCover"></ion-img>
+	</div>
+
+	<ion-card *ngIf="loading">
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<ion-spinner name="lines"></ion-spinner>
+				</ion-col>
+				<ion-col>
+					Hämtar meny...
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+
+	<ion-list *ngIf="!loading" class="food-menu" lines="full">
+		<ion-item-group *ngFor="let menu of foodMenus; let i index">
+
+			<ion-item-divider class="dish-cat">
+				<ion-grid>
+					<ion-row>
+						<h3>
+							<span *ngIf="inDebugMode()">
+								{{ menu.id }}
+							</span>
+							{{ menu.name }}
+						</h3>
+					</ion-row>
+					<ion-row *ngIf="menu.description" style="padding-bottom: 10px">
+						{{ menu.description }}
+					</ion-row>
+				</ion-grid>
+			</ion-item-divider>
+
+			<!--<ion-item-sliding
+					*ngFor="let item of menu.items; let i index"
+					id="{{ item.id }}"> -->
+				<ion-item *ngFor="let item of menu.items; let i index" class="dish"
+					detail
+					lines="none"
+					detailIcon="none"
+					(click)="addToBasket(item)"
+					 >
+
+					<!-- style="width: 20px; height: 20px; background: #5d58e0" -->
+					<ion-icon
+							(click)="toggleFavorite(item)"
+							slot="start"
+							  [src]="getFaveImgSrc(item)"
+							name="{{ item.faveIconClass }}">
+					</ion-icon>
+
+					<!--
+					<ion-checkbox slot="start" (click)="toggleFavorite(item)" [checked]="true"
+								  (ionChange)="getIsFave(item)" value="true" [(ngModel)]="item.faveIconClass"></ion-checkbox>
+					-->
+
+					<ion-label class="ion-text-wrap">
+						<span>{{ getItemName(item) }}
+						{{ item.faveIconClass }}
+						</span>
+						<p>{{ item.desc }}</p>
+						<p class="price"><b>
+							{{ item.price }} {{ item.symbol }}</b>
+						</p>
+					</ion-label>
+
+					<ion-thumbnail *ngIf="haveDishPhoto(item)" slot="end">
+						<img [src]="getDishPic(item)" alt="">
+					</ion-thumbnail>
+
+					<ion-button slot="end">
+						<ion-icon name="chevron-forward-outline"></ion-icon>
+					</ion-button>
+
+					<div slot="end" style="display: none; background: lime;">
+
+						<div style="display: flex">
+							<div style="flex: 1">
+								<ion-icon (click)="addToBasket(item)" name="cart" slot="end"></ion-icon>
+							</div>
+							<div *ngIf="showBasketLabel(item)" style="flex: 1;
+						border-radius: 5px;
+						background: #00aced;
+						width: 20px;">
+								{{ getItemQty(item) }}
+							</div>
+						</div>
+					</div>
+
+				</ion-item>
+			<!--
+				<ion-item-options side="end">
+					<ion-item-option>Unread</ion-item-option>
+				</ion-item-options>
+
+			</ion-item-sliding>
+			-->
+		</ion-item-group>
+	</ion-list>
+
+	<!--
+	<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+		<ion-fab-button style="margin-bottom: -5px;" color="primary" (click)="presentSettingsModal()">
+			<ion-icon name="md-globe"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+	-->
+
+</ion-content>
